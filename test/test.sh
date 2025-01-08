@@ -10,7 +10,7 @@ if [[ -r $1 ]] ; then
 fi;
 
 if [[ -e ../predict.py ]] ; then 
-    python3 ../predict.py --model Schnet20_6_5Ang_train80 --splits '01 02 03 04 05' --device cpu --output expected_predicted in_vitro.xyz;
+    python3 predict.py --model Schnet20_6_5Ang_train80 --splits '01 02 03 04 05' --device cpu --output expected_predicted in_vitro.xyz;
     else
        echo "Missing predict.py" ;
 fi;
