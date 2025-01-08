@@ -7,7 +7,7 @@ Create new python environment
 ```
 python -m venv ~/.predict_SchNetPack
 ```
-Folder`~/.predict_SchNetPack`can be changed to any path. Write access to parent folder have to be granted.
+Folder`~/.predict_SchNetPack` can be changed to any path. Write access to parent folder have to be granted.
 
 Install [SchNetPack](https://schnetpack.readthedocs.io/en/latest/index.html). For example:
 ```
@@ -19,7 +19,7 @@ pip install .
 
 Download program
 ```
-git clone  <dest_dir>
+git clone https://github.com/j-matuska/predict_SchNet.git <dest_dir>
 cd <dest_dir>
 ```
 Install requirements
@@ -55,4 +55,8 @@ This can be showed by `python3 /path/to/predict.py -h`
 
 # Instalation verification
 
-Run command `bash ./test.sh  /path/to/python/environment` in folder `./test` and follow instructions.
+Extract file `in_vitro.xyz.tar.xz` in folder `./test`:
+```
+tar -xvxf in_vitro.xyz.tar.xz
+```
+Run command `bash ./test.sh  ~/.predict_SchNetPack/bin/activate` in folder `./test` and follow instructions.
