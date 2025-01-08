@@ -8,6 +8,7 @@ from schnetpack.interfaces import AtomsConverter
 from schnetpack.data import AtomsLoader
 import schnetpack.transform
 import pytorch_lightning
+import inspect
 
 
 class extended_model:
@@ -127,6 +128,13 @@ class pytorch_lightning_model_wrapper(pytorch_lightning.LightningModule):
         self.model = torch.load(
             self.model_dir+'/best_model'
             )
+        
+        # modification to fit model of older SchNetPack 2.0.1 to newer SchNetPack 2.1.1
+        schnet_parameters = inspect.getfullargspec(schnetpack.representation.SchNet)[0]
+        #print(schnet_parameters)
+        if 'electronic_embeddings' in schnet_parameters:
+            self.model.get_submodule("representation").electronic_embeddings = []
+            print("Variable 'electronic_embeddings' is defined and declared as list(). ")
         
     # def predict_step(self, batch):
     #     inputs, target = batch

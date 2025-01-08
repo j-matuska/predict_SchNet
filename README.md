@@ -22,7 +22,7 @@ Download program
 git clone https://github.com/j-matuska/predict_SchNet.git <dest_dir>
 cd <dest_dir>
 ```
-Install requirements
+Install requirements (obsolete)
 ```
 pip install -r requirements.txt
 ```
