@@ -13,14 +13,14 @@ setup(
     version="0.2",
     author="J. Matuska",
     url="https://github.com/j-matuska/predict_SchNet",
-    #packages=find_packages("."),
-    packages=[
-        'kniznica',
-        'kniznica.parser',
-        'kniznica.data',
-        'kniznica.model',
-        'kniznica.output',
-        ],
+    packages=find_packages("."),
+    # packages=[
+    #     'kniznica',
+    #     'kniznica.parser',
+    #     'kniznica.data',
+    #     'kniznica.model',
+    #     'kniznica.output',
+    #     ],
     #package_dir={"": "kniznica"},
     package_data={
         'kniznica.model.trained_models' : ["*"]
