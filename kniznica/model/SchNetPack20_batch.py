@@ -39,6 +39,8 @@ class trained_NN:
         property_list = [{} for i in range(n_mol)]
         print(n_mol)
         
+        print(torch.get_num_threads())
+        print(torch.get_num_interop_threads())
         # suradnicove vstupy z xyz; konverzia na vstup pre NN
         inputs = [self.converter(a) for a in atoms]
         

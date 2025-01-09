@@ -59,4 +59,8 @@ Extract file `in_vitro.xyz.tar.xz` in folder `./test`:
 ```
 tar -xvxf in_vitro.xyz.tar.xz
 ```
-Run command `bash ./test.sh  ~/.predict_SchNetPack/bin/activate` in folder `./test` and follow instructions.
+Then run command 
+```
+bash ./test.sh  ~/.predict_SchNetPack/bin/activate
+```
+and follow the instructions.
