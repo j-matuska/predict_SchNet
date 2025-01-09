@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="predict",
-    version="0.1",
+    version="0.2",
     author="J. Matuska",
     url="https://github.com/j-matuska/predict_SchNet",
     #packages=find_packages("."),
@@ -21,7 +21,7 @@ setup(
         'kniznica.model',
         'kniznica.output',
         ],
-    #package_dir={"": ""},
+    #package_dir={"": "kniznica"},
     package_data={
         'kniznica.model.trained_models' : ["*"]
         },
