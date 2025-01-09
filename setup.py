@@ -6,24 +6,24 @@ Created on Wed Jan  8 12:01:33 2025
 @author: jamat
 """
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name="predict",
     version="0.2",
     author="J. Matuska",
     url="https://github.com/j-matuska/predict_SchNet",
-    packages=find_packages("."),
-    # packages=[
-    #     'kniznica',
-    #     'kniznica.parser',
-    #     'kniznica.data',
-    #     'kniznica.model',
-    #     'kniznica.output',
-    #     ],
-    #package_dir={"": "kniznica"},
+    #packages=find_packages("."),
+    packages=[
+        'kniznica',
+        'kniznica.parser',
+        'kniznica.data',
+        'kniznica.model',
+        'kniznica.output',
+        ],
+    package_dir={"": "."},
     package_data={
-        'kniznica.model.trained_models' : ["*"]
+        'kniznica.model.trained_models' : ["01", "02", "03", "04", "05"]
         },
     scripts=[
         "predict.py"
