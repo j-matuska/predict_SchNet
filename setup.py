@@ -21,7 +21,7 @@ setup(
         'kniznica.model',
         'kniznica.output',
         ],
-    package_dir={"": "kniznica"},
+    #package_dir={"": ""},
     package_data={
         'kniznica.model.trained_models' : ["*"]
         },
