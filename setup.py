@@ -18,7 +18,8 @@ setup(
               'kniznica.parser',
               'kniznica.data',
               'kniznica.model',
-              'kniznica.output'
+              'kniznica.output',
+              'kniznica.model.trained_models.Schnet20_6_5Ang_train80'
               ],
     scripts=[
         "predict.py"
