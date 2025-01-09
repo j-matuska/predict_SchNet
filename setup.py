@@ -12,8 +12,14 @@ setup(
     name="predict",
     version="0.1",
     author="J. Matuska",
-    url="",
-    packages=find_packages("."),
+    url="https://github.com/j-matuska/predict_SchNet",
+    #packages=find_packages("."),
+    packages=['kniznica',
+              'kniznica.parser',
+              'kniznica.data',
+              'kniznica.model',
+              'kniznica.output'
+              ],
     scripts=[
         "predict.py"
         ],
