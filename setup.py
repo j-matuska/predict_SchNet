@@ -23,7 +23,7 @@ setup(
         ],
     package_dir={"": "."},
     package_data={
-        'kniznica.model.trained_models' : ["Schnet03_6_10Ang_train80", "Schnet20_6_10Ang_train80", "Schnet20_6_5Ang_train80"]
+        'kniznica.model' : ["trained_models"]
         },
     scripts=[
         "predict.py"
