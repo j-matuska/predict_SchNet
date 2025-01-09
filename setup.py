@@ -7,6 +7,16 @@ Created on Wed Jan  8 12:01:33 2025
 """
 
 from setuptools import setup
+import os
+
+def package_files(directory):
+    paths = []
+    for (path, directories, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.join('..', path, filename))
+    return paths
+
+data_files = package_files('./kniznica/model/trained_models')
 
 setup(
     name="predict",
@@ -20,10 +30,11 @@ setup(
         'kniznica.data',
         'kniznica.model',
         'kniznica.output',
+        'kniznica.model.trained_models'
         ],
     package_dir={"": "."},
     package_data={
-        'kniznica.model' : ["trained_models"]
+        '' : data_files
         },
     scripts=[
         "predict.py"
