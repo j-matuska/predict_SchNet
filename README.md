@@ -64,3 +64,10 @@ Then run command
 bash ./test.sh  ~/.predict_SchNetPack/bin/activate
 ```
 and follow the instructions.
+
+# References
+
+It is recomended to base reference on used model:
+* [Schnet20_6_5Ang_train80](https://doi.org/10.1021/acs.jpcb.4c00296)
+* [Schnet20_6_10Ang_train80](https://doi.org/10.1002/qua.27110)
+* [Schnet03_6_10Ang_train80](https://doi.org/10.1002/qua.27110)

@@ -15,7 +15,7 @@ def parse_cmd():
                         type = str,
                         choices = ['Schnet20_6_5Ang_train80', 'Schnet20_6_10Ang_train80', 'Schnet03_6_10Ang_train80'],
                         required = False,
-                        help = "Optional choise of the pretrained NN model. Default: 'Schnet03_6_10Ang_train80' ",
+                        help = "Optional choise of the pretrained NN model. Default: 'Schnet20_6_10Ang_train80' ",
                         metavar = "MODEL"
                         )
     
