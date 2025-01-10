@@ -67,7 +67,9 @@ and follow the instructions.
 
 # References
 
-It is recomended to base reference on used model:
-* [Schnet20_6_5Ang_train80](https://doi.org/10.1021/acs.jpcb.4c00296)
-* [Schnet20_6_10Ang_train80](https://doi.org/10.1002/qua.27110)
-* [Schnet03_6_10Ang_train80](https://doi.org/10.1002/qua.27110)
+Please cite the folling references when using a given model:
+* Schnet20_6_5Ang_train80 : J. Matúška, L. Bucinsky, M. Gall, M. Pitoňák, M. Štekláč.
+J. Phys. Chem. 2024, B128(20) , 4943-4951.[https://doi.org/10.1021/acs.jpcb.4c00296](https://doi.org/10.1021/acs.jpcb.4c00296)
+* Schnet20_6_10Ang_train80, Schnet03_6_10Ang_train80 : L. Bucinsky, M. Gall, J. Matúška, M. Pitoňák, M. Štekláč. 
+Advances and critical assessment of machine learning techniques for prediction of docking scores. 
+Int. J. Quantum Chem. 2023, 123(24), e27110. [https://doi.org/10.1002/qua.27110](https://doi.org/10.1002/qua.27110)
