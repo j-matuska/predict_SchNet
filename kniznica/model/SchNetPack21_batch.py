@@ -66,6 +66,7 @@ class trained_NN:
             trainer = pytorch_lightning.Trainer(
                 num_nodes=4,
                 devices=-1, # all devices; 'auto' = based on accerelator; [int,..] list of indicies of the devices
+                strategy="ddp",
                 logger=False,
                 accelerator='auto',
                 enable_progress_bar=False
