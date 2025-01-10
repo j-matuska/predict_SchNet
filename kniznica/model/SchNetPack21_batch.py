@@ -9,7 +9,7 @@ from schnetpack.data import AtomsLoader
 import schnetpack.transform
 import pytorch_lightning
 import inspect
-
+import multiprocessing
 
 class extended_model:
     
@@ -42,7 +42,11 @@ class trained_NN:
         print(torch.get_num_threads())
         print(torch.get_num_interop_threads())
         # suradnicove vstupy z xyz; konverzia na vstup pre NN
-        inputs = self.converter(atoms)
+        #inputs = self.converter(atoms)
+        
+        pool = multiprocessing.Pool(multiprocessing.cpu_count())
+        inputs = pool.map(self.converter, [at for at in atoms])
+        pool.close()
         
         print(len(inputs))
         
