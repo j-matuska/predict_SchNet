@@ -44,7 +44,7 @@ class trained_NN:
         inputs = [self.converter(a) for a in atoms]
         # it is not working, somehow it is in conflict with torch
         # pool = torch.multiprocessing.Pool(4)#multiprocessing.cpu_count())
-        # inputs = pool.map(self.converter, [a for a in atoms])
+        # inputs = [pool.apply(self.converter, args=([a for a in atoms],))]
         # pool.close()
         
         print(len(inputs))
@@ -94,9 +94,14 @@ class trained_NN:
             #property_list[i]["name"] = identifier
             
             # add prediction to dictionary
-            for i in range(n_mol):
-                property_list[i]["name"] = str(atoms[i].info['name'])
-                property_list[i][split] = pp[i]
+            property_list = []
+            for a,p in zip(atoms,pp):
+                property_list.append(
+                    {
+                        "name" : str(a.info['name']),
+                        split  : p
+                    }
+                )
                 
         return property_list
 
@@ -140,7 +145,7 @@ class pytorch_lightning_model_wrapper(pytorch_lightning.LightningModule):
         #print(schnet_parameters)
         if 'electronic_embeddings' in schnet_parameters:
             self.model.get_submodule("representation").electronic_embeddings = []
-            print("Variable 'electronic_embeddings' is defined and declared as list(). ")
+            print("Variable 'electronic_embeddings' is defined and declared as empty list(). ")
         
     # def predict_step(self, batch):
     #     inputs, target = batch

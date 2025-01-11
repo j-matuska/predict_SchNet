@@ -64,8 +64,8 @@ class trained_NN:
             # calculation of prediction
                         
             trainer = pytorch_lightning.Trainer(
-                num_nodes=4,
-                devices=-1, # all devices; 'auto' = based on accerelator; [int,..] list of indicies of the devices
+                num_nodes=1,
+                devices=1, # all devices; 'auto' = based on accerelator; [int,..] list of indicies of the devices
                 logger=False,
                 accelerator='auto',
                 enable_progress_bar=False
