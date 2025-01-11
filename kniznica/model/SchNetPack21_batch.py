@@ -41,11 +41,11 @@ class trained_NN:
         print(torch.get_num_threads())
         print(torch.get_num_interop_threads())
         # suradnicove vstupy z xyz; konverzia na vstup pre NN
-        inputs = [self.converter(a) for a in atoms]
+        # inputs = [self.converter(a) for a in atoms]
         # it is not working, somehow it is in conflict with torch
-        # pool = torch.multiprocessing.Pool(4)#multiprocessing.cpu_count())
-        # inputs = pool.map(self.converter, atoms)
-        # pool.close()
+        pool = torch.multiprocessing.Pool(4)#multiprocessing.cpu_count())
+        inputs = pool.map(self.converter, [a for a in atoms])
+        pool.close()
         
         print(len(inputs))
         
@@ -67,7 +67,7 @@ class trained_NN:
             # calculation of prediction
                         
             trainer = pytorch_lightning.Trainer(
-                num_nodes=4,
+                num_nodes=1,
                 devices=-1, # all devices; 'auto' = based on accerelator; [int,..] list of indicies of the devices
                 strategy="ddp",
                 logger=False,
