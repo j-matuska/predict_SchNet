@@ -41,8 +41,8 @@ class trained_NN:
         print(torch.get_num_threads())
         print(torch.get_num_interop_threads())
         # suradnicove vstupy z xyz; konverzia na vstup pre NN
-        inputs = self.converter(atoms)
-        # it is not working, somehow it is in confliect with torch
+        inputs = [self.converter(a) for a in atoms]
+        # it is not working, somehow it is in conflict with torch
         # pool = torch.multiprocessing.Pool(4)#multiprocessing.cpu_count())
         # inputs = pool.map(self.converter, atoms)
         # pool.close()
