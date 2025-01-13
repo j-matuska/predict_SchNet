@@ -31,16 +31,16 @@ def parse_cmd():
                         metavar = " '01 ...', "
                         )
     
-    # choise device
-    parser.add_argument("--device", 
+    # choise mode
+    parser.add_argument("--mode", 
                         action = 'store',
                         #nargs = 1,
-                        default = 'cpu',
+                        default = 'serial',
                         type = str,
-                        choices = ['cpu', 'cuda'],
+                        choices = ['serial', 'parallel'],
                         required = False,
-                        help = "Optional choise of the computer resource. Default: 'cpu' ",
-                        metavar = "DEVICE"
+                        help = "Optional choise of the computer resources. Mode 'serial' allocate 4 cpu and one graphic card. Mode 'parallel' aim to take all possible graphic cards. Default: 'serial' ",
+                        metavar = "MODE"
                         )
     
     # choise output mode
