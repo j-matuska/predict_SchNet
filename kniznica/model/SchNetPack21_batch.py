@@ -16,7 +16,7 @@ class extended_model:
         self.split = split
         self.model = model
 
-class trained_NN:
+class trained_NN21:
     
     def __init__(self, model_dir: str, splits: str, cutoff: float, device = 'cpu'):
         self.model_dir = model_dir

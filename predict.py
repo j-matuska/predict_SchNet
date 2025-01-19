@@ -13,7 +13,7 @@ import os
 from kniznica.parser.predict import parse_cmd
 from kniznica.data.ASE import load_xyz, get_expected
 from kniznica.model.SchNetPack20_batch import trained_NN
-#from kniznica.model.SchNetPack21_batch import trained_NN
+from kniznica.model.SchNetPack21_batch import trained_NN21
 from kniznica.output.conversions import collate_expected_predicted_all
 from kniznica.output.csv import write_csv
 from kniznica.model.configuration import get_model_properties
@@ -46,8 +46,12 @@ def main(args):
     # define properties of model
     model_dir, cutoff = get_model_properties(modelname)
     
+    if mode == 'parallel':
+        NNM = trained_NN21
+    else:
+        NNM = trained_NN
     # load NN from config
-    NNs = trained_NN(model_dir, splits, cutoff, device = device)
+    NNs = NNM(model_dir, splits, cutoff, device = device)
     
     start_time = time.time()
     logging.info("Start time: {}".format(start_time)) 
