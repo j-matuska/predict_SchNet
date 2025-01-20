@@ -2,11 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import torch
-from torch.utils.data import DataLoader
+from torch.utils.data import Dataset, Sampler
+from torch.utils.data.dataloader import _collate_fn_t, T_co
 
 from schnetpack.interfaces import AtomsConverter
-from schnetpack.data import AtomsLoader
+from schnetpack.data import AtomsLoader, _atoms_collate_fn
 import schnetpack.transform
+
+from typing import Optional, Sequence
 
 import pytorch_lightning
 
@@ -14,21 +17,45 @@ import logging
 
 from ASE import load_xyz
 
-class XYZDataset(DataLoader):
+class XYZAtomsDataLoader(AtomsLoader):
     """
     
     """
-    def __init__(self, xyz_name):
-        super().__init__()
+    def __init__(
+        self, 
+        xyz_name :str,
+        batch_size: Optional[int] = 1,
+        shuffle: bool = False,
+        sampler: Optional[Sampler[int]] = None,
+        batch_sampler: Optional[Sampler[Sequence[int]]] = None,
+        num_workers: int = 0,
+        collate_fn: _collate_fn_t = _atoms_collate_fn,
+        pin_memory: bool = False,
+        **kwargs,
+        ):
+        super(XYZAtomsDataLoader, self).__init__(
+            dataset = load_xyz(xyz_name),
+            batch_size = batch_size,
+            shuffle = shuffle,
+            sampler = sampler,
+            batch_sampler = batch_sampler,
+            num_workers = num_workers,
+            collate_fn = collate_fn,
+            pin_memory = pin_memory,
+            **kwargs,
+            )
         self.xyz_name = xyz_name
-        self.converter = AtomsConverter(
-            neighbor_list = schnetpack.transform.MatScipyNeighborList(cutoff = self.cutoff), # alternative: ASENeighborList(cutoff = cutoff), 
-            transforms = [
-                schnetpack.transform.SubtractCenterOfMass()
-                ],
-            device = self.device,
-            dtype=torch.float32
-            ) # converter to translate ASE atoms to Schnetpack input
+        # self.converter = AtomsConverter(
+        #     neighbor_list = schnetpack.transform.MatScipyNeighborList(cutoff = self.cutoff), # alternative: ASENeighborList(cutoff = cutoff), 
+        #     transforms = [
+        #         schnetpack.transform.SubtractCenterOfMass()
+        #         ],
+        #     device = self.device,
+        #     dtype=torch.float32
+        #     ) # converter to translate ASE atoms to Schnetpack input
+        # load molecules
+        # self.molecules = 
+        
     
     
 

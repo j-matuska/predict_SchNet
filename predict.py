@@ -9,11 +9,13 @@ import logging
 import platform
 import time
 import os 
+import pytorch_lightning
+
 
 from kniznica.parser.predict import parse_cmd
-from kniznica.data.ASE import load_xyz, get_expected
+from kniznica.data.ASE import AtomsDataLoader, get_expected
 from kniznica.model.SchNetPack20_batch import trained_NN
-from kniznica.model.SchNetPack21_batch import trained_NN21
+from kniznica.model.SchNetPack21_batch import trained_NN21, pytorch_lightning_model_wrapper
 from kniznica.output.conversions import collate_expected_predicted_all
 from kniznica.output.csv import write_csv
 from kniznica.model.configuration import get_model_properties
@@ -37,9 +39,16 @@ def main(args):
     logging.info('{} \n'.format(cpu_model))
     
     # load molecules
-    atoms = load_xyz(xyz_name)
-
-    num_mol=len(atoms)
+    dataloader = AtomsDataLoader(
+            xyz_name,
+            batch_size=100,
+            num_workers=4,
+            shuffle=False,
+            # shuffle=True,
+            pin_memory=True,
+        )
+    
+    num_mol=len(dataloader)
     print(xyz_name, 'Number of molecules: ',num_mol)
     logging.info('{} - Number of molecules: {}'.format(xyz_name, num_mol))
     
@@ -50,14 +59,47 @@ def main(args):
         NNM = trained_NN21
     else:
         NNM = trained_NN
+        
     # load NN from config
-    NNs = NNM(model_dir, splits, cutoff, device = device)
+    trainer = pytorch_lightning.Trainer(
+        num_nodes=1,
+        devices=-1, # all devices; 'auto' = based on accerelator; [int,..] list of indicies of the devices
+        strategy="ddp",
+        logger=False,
+        accelerator='auto',
+        enable_progress_bar=False
+    )
+    
+    for split in splits:
+        
+        model = pytorch_lightning_model_wrapper(model_dir, split)
+        
+        # calculation of prediction
+        
+        predicted_property = trainer.predict(model, dataloaders=dataloader) # inputs tu urcite nie su dobre
+        
+        # print(type(predicted_property), predicted_property)
+        
+        pp = []
+        for a in predicted_property:
+            # print(a)
+            # print(type(a))
+            pp.extend(a["DS"].numpy().tolist())
     
     start_time = time.time()
     logging.info("Start time: {}".format(start_time)) 
     
     # predict all
-    predictions = NNs.predict(atoms)
+    #predictions = NNs.predict(dataloader)
+    predictions = []
+    atoms = [{"name" : "dummy"} for i in range(num_mol)]
+    for a,p in zip(atoms,pp):
+        predictions.append(
+            {
+                "name" : str(a['name']),
+                split  : p
+            }
+        )
     
     stop_time = time.time()
     logging.info("End time: {}".format(stop_time))

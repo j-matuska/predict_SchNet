@@ -23,57 +23,35 @@ class trained_NN21:
         self.splits = splits
         self.cutoff = cutoff
         self.device = device
-        self.converter = AtomsConverter(
-            neighbor_list = schnetpack.transform.MatScipyNeighborList(cutoff = self.cutoff), # alternative: ASENeighborList(cutoff = cutoff), 
-            transforms = [
-                schnetpack.transform.SubtractCenterOfMass()
-                ],
-            device = self.device,
-            dtype=torch.float32
-            ) # converter to translate ASE atoms to Schnetpack input
+        # self.converter = AtomsConverter(
+        #     neighbor_list = schnetpack.transform.MatScipyNeighborList(cutoff = self.cutoff), # alternative: ASENeighborList(cutoff = cutoff), 
+        #     transforms = [
+        #         schnetpack.transform.SubtractCenterOfMass()
+        #         ],
+        #     device = self.device,
+        #     dtype=torch.float32
+        #     ) # converter to translate ASE atoms to Schnetpack input
 
-    def predict(self, atoms):
+    def predict(self, dataloader):
         
-        n_mol = len(atoms)
-        property_list = [{} for i in range(n_mol)]
+        n_mol = len(dataloader)
+        #property_list = [{} for i in range(n_mol)]
         print(n_mol)
-        
-        print(torch.get_num_threads())
-        print(torch.get_num_interop_threads())
-        # suradnicove vstupy z xyz; konverzia na vstup pre NN
-        inputs = [self.converter(a) for a in atoms]
-        # it is not working, somehow it is in conflict with torch
-        # pool = torch.multiprocessing.Pool(4)#multiprocessing.cpu_count())
-        # inputs = [pool.apply(self.converter, args=([a for a in atoms],))]
-        # pool.close()
-        
-        print(len(inputs))
-        
-        dataloader = AtomsLoader(
-                inputs,
-                batch_size=100,
-                num_workers=4,
-                shuffle=False,
-                # shuffle=True,
-                # pin_memory=self._pin_memory,
-            )
-        
-        print(len(dataloader))
                 
+        trainer = pytorch_lightning.Trainer(
+            num_nodes=1,
+            devices=-1, # all devices; 'auto' = based on accerelator; [int,..] list of indicies of the devices
+            strategy="ddp",
+            logger=False,
+            accelerator='auto',
+            enable_progress_bar=False
+        )
+        
         for split in self.splits:
             
             model = pytorch_lightning_model_wrapper(self.model_dir, split)
             
             # calculation of prediction
-                        
-            trainer = pytorch_lightning.Trainer(
-                num_nodes=1,
-                devices=-1, # all devices; 'auto' = based on accerelator; [int,..] list of indicies of the devices
-                strategy="ddp",
-                logger=False,
-                accelerator='auto',
-                enable_progress_bar=False
-            )
             
             predicted_property = trainer.predict(model, dataloaders=dataloader) # inputs tu urcite nie su dobre
             
@@ -93,17 +71,17 @@ class trained_NN21:
             #identifier = str(atoms[i].info['name'])
             #property_list[i]["name"] = identifier
             
-            # add prediction to dictionary
-            property_list = []
-            for a,p in zip(atoms,pp):
-                property_list.append(
-                    {
-                        "name" : str(a.info['name']),
-                        split  : p
-                    }
-                )
+            # add prediction to dictionary; this is impossible with dataloader
+            # property_list = []
+            # for a,p in zip(atoms,pp):
+            #     property_list.append(
+            #         {
+            #             "name" : str(a.info['name']),
+            #             split  : p
+            #         }
+            #     )
                 
-        return property_list
+        return pp
 
     # def load_model(self, s: str):
     
