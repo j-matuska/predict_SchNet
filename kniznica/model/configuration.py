@@ -22,6 +22,58 @@ def get_models_configuration():
     "Schnet20_6_5Ang_train80" : {
         "model_dir": "trained_models/Schnet20_6_5Ang_train80/", 
         "cutoff": 5.0
+        },
+    "PaiNN20_3_5Ang_train80" : {
+        "model_dir": "trained_models/PaiNN20_3_5Ang_train80/", 
+        "cutoff": 5.0
+        },
+    "pdbqt_M1+M2_PaiNN20_3_5Ang_train80" : {
+        "model_dir": "trained_models/pdbqt_M1+M2_PaiNN20_3_5Ang_train80/", 
+        "cutoff": 5.0
+        },
+    "pdbqt_M1+M2_Schnet20_6_5Ang_train80" : {
+        "model_dir": "trained_models/pdbqt_M1+M2_Schnet20_6_5Ang_train80/", 
+        "cutoff": 5.0
+        },
+    "pdbqt_M1_PaiNN20_3_5Ang_train80" : {
+        "model_dir": "trained_models/pdbqt_M1_PaiNN20_3_5Ang_train80/", 
+        "cutoff": 5.0
+        },
+    "pdbqt_M1_Schnet20_6_5Ang_train80" : {
+        "model_dir": "trained_models/pdbqt_M1_Schnet20_6_5Ang_train80/", 
+        "cutoff": 5.0
+        },
+    "pdbqt_M2_PaiNN20_3_5Ang_train80" : {
+        "model_dir": "trained_models/pdbqt_M2_PaiNN20_3_5Ang_train80/", 
+        "cutoff": 5.0
+        },
+    "pdbqt_M2_Schnet20_6_5Ang_train80" : {
+        "model_dir": "trained_models/pdbqt_M2_Schnet20_6_5Ang_train80/", 
+        "cutoff": 5.0
+        },
+    "pdbqt_M3+M2_PaiNN20_3_5Ang_train80" : {
+        "model_dir": "trained_models/pdbqt_M3+M2_PaiNN20_3_5Ang_train80/", 
+        "cutoff": 5.0
+        },
+    "pdbqt_M3+M2_Schnet20_6_5Ang_train80" : {
+        "model_dir": "trained_models/pdbqt_M3+M2_Schnet20_6_5Ang_train80/", 
+        "cutoff": 5.0
+        },
+    "pdbqt_M3_PaiNN20_3_5Ang_train80" : {
+        "model_dir": "trained_models/pdbqt_M3_PaiNN20_3_5Ang_train80/", 
+        "cutoff": 5.0
+        },
+    "pdbqt_M3_Schnet20_6_5Ang_train80" : {
+        "model_dir": "trained_models/pdbqt_M3_Schnet20_6_5Ang_train80/", 
+        "cutoff": 5.0
+        },
+    "pdbqt_M4_PaiNN20_3_5Ang_train80" : {
+        "model_dir": "trained_models/pdbqt_M4_PaiNN20_3_5Ang_train80/", 
+        "cutoff": 5.0
+        },
+    "pdbqt_M4_Schnet20_6_5Ang_train80" : {
+        "model_dir": "trained_models/pdbqt_M4_Schnet20_6_5Ang_train80/", 
+        "cutoff": 5.0
         }
     } 
     
