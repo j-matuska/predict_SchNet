@@ -54,7 +54,7 @@ def parse_cmd():
                         type = str,
                         choices = ['serial', 'parallel'],
                         required = False,
-                        help = "Optional choise of the computer resources. Mode 'serial' allocate 4 cpu and one graphic card. Mode 'parallel' aim to take all possible graphic cards. Default: 'serial' ",
+                        help = "Optional choise of the computer resources. Mode 'serial' allocate 4 cpu and one graphic card. Mode 'parallel' aim to take all possible graphic cards (not fully functional). Default: 'serial' ",
                         metavar = "MODE"
                         )
     
