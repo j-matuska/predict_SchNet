@@ -18,7 +18,5 @@ module list
 
 source ~/.predict_SchNet/bin/activate
 
-cd ~/predict_SchNet/test
-
 ./test.sh  ~/.predict_SchNet/bin/activate
 
