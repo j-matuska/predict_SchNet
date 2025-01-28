@@ -36,7 +36,7 @@ def main(args):
     cpu_model = platform.processor()
     logging.info('{} \n'.format(cpu_model))
     
-    atoms = load_xyz(xyz_name)[:10]
+    atoms = load_xyz(xyz_name)
     
     datamodule = AtomsConverterDatamodule(
         atoms,
