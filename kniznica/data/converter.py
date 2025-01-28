@@ -35,7 +35,7 @@ class AtomsConverterModule(pytorch_lightning.LightningModule):
     def predict_step(self, inputs):
         return self.converter(inputs)
     
-class AtomsConverterDatamodule(pytorch_lightning.LightningDataModule):
+class AtomsConverterDatamodule(torch.utils.data.DataLoader):
     def __init__(
             self,
             inputs,
@@ -46,7 +46,14 @@ class AtomsConverterDatamodule(pytorch_lightning.LightningDataModule):
             num_workers: int = 0,
             pin_memory: bool = False
             ):
-        super().__init__()
+        super().__init__(
+            self,
+            self.inputs,
+            batch_size = self.batch_size,
+            num_workers = self.num_workers,
+            shuffle = self.shuffle,
+            pin_memory = self.pin_memory
+            )
         self.inputs = inputs
         self.batch_size = batch_size
         self.shuffle = shuffle
@@ -55,21 +62,3 @@ class AtomsConverterDatamodule(pytorch_lightning.LightningDataModule):
         self.num_workers = num_workers
         self.pin_memory = pin_memory
 
-    def train_dataloader(self):
-        return torch.utils.data.DataLoader([])
-
-    def val_dataloader(self):
-        return torch.utils.data.DataLoader([])
-
-    def test_dataloader(self):
-        return torch.utils.data.DataLoader([])
-    
-    def predict_dataloader(self):
-        dataset = torch.utils.data.DataLoader(
-            self.inputs,
-            batch_size = self.batch_size,
-            num_workers = self.num_workers,
-            shuffle = self.shuffle,
-            pin_memory = self.pin_memory
-            )
-        return dataset

@@ -45,17 +45,8 @@ def main(args):
         )
     
     model = AtomsConverterModule(5.0, device)
-    
-    trainer = pytorch_lightning.Trainer(
-        num_nodes=1,
-        devices=1, # all devices; 'auto' = based on accerelator; [int,..] list of indicies of the devices
-        strategy="auto",
-        logger=False,
-        accelerator='cpu',
-        enable_progress_bar=False
-    )
-    
-    prediction = trainer.predict(model, dataloaders=datamodule)
+
+    prediction = model(datamodule)
     
     print(prediction)
 
