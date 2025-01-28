@@ -20,14 +20,12 @@ class AtomsConverterModule(pytorch_lightning.LightningModule):
     
     def __init__(self, cutoff, device):
         super().__init__()
-        self.cutoff = cutoff
-        self.device = device
         self.converter = AtomsConverter(
-            neighbor_list = schnetpack.transform.MatScipyNeighborList(cutoff = self.cutoff), # alternative: ASENeighborList(cutoff = cutoff), 
+            neighbor_list = schnetpack.transform.MatScipyNeighborList(cutoff = cutoff), # alternative: ASENeighborList(cutoff = cutoff), 
             transforms = [
                 schnetpack.transform.SubtractCenterOfMass()
                 ],
-            device = self.device,
+            device = device,
             dtype=torch.float32
             ) # converter to translate ASE atoms to Schnetpack input
         
