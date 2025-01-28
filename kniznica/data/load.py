@@ -64,7 +64,18 @@ class XYZDataModule(pytorch_lightning.LightningDataModule):
     A general ``LightningDataModule`` for conversion of XYZ to SchNetPack dataset.
 
     """
-    def __init__(self, xyz_name):
+    def __init__(
+            self, 
+            xyz_name : str,
+            batch_size: Optional[int] = 1,
+            shuffle: bool = False,
+            sampler: Optional[Sampler[int]] = None,
+            batch_sampler: Optional[Sampler[Sequence[int]]] = None,
+            num_workers: int = 0,
+            collate_fn: _collate_fn_t = _atoms_collate_fn,
+            pin_memory: bool = False,
+            **kwargs,
+            ):
         super().__init__()
         self.xyz_name = xyz_name
         self.converter = AtomsConverter(
@@ -75,6 +86,13 @@ class XYZDataModule(pytorch_lightning.LightningDataModule):
             device = self.device,
             dtype=torch.float32
             ) # converter to translate ASE atoms to Schnetpack input
+        self.batch_size = batch_size,
+        self.shuffle = shuffle,
+        self.sampler = sampler,
+        self.batch_sampler = batch_sampler,
+        self.num_workers = num_workers,
+        self.collate_fn = collate_fn,
+        self.pin_memory = pin_memory
     
     def prepare_data(self):
         # download, IO, etc. Useful with shared filesystems
@@ -89,47 +107,17 @@ class XYZDataModule(pytorch_lightning.LightningDataModule):
     def setup(self, stage):
         # make assignments here (val/train/test split)
         # called on every process in DDP
-        
-        n_mol = len(self.molecules)
-        #property_list = [{} for i in range(n_mol)]
-        print(n_mol)
-        
-        print(torch.get_num_threads())
-        print(torch.get_num_interop_threads())
-        # suradnicove vstupy z xyz; konverzia na vstup pre NN
-        #inputs = [self.converter(a) for a in self.molecules]
-        # it is not working, somehow it is in conflict with torch
-        # pool = torch.multiprocessing.Pool(4)#multiprocessing.cpu_count())
-        # inputs = [pool.apply(self.converter, args=([a for a in atoms],))]
-        # pool.close()
-        inputs = self.converter(list(self.molecules))
-        
-        print(len(inputs))
-        
+ 
+        self.predict_data = self.converter(list(self.molecules))
+    
+    def predict_dataloader(self):
         dataloader = AtomsLoader(
-                inputs,
-                batch_size=100,
-                num_workers=4,
-                shuffle=False,
+                self.predict_data,
+                batch_size = self.batch_size,
+                num_workers = self.num_workers,
+                shuffle = self.shuffle,
                 # shuffle=True,
-                pin_memory=True
+                pin_memory = self.pin_memory
             )
-        
+        return dataloader
 
-    def train_dataloader(self):
-        return [0]
-
-    def val_dataloader(self):
-        return [0]
-
-    def test_dataloader(self):
-        return [0]
-
-    def on_exception(self, exception):
-        # clean up state after the trainer faced an exception
-        ...
-
-    def teardown(self):
-        # clean up state after the trainer stops, delete files...
-        # called on every process in DDP
-        ...

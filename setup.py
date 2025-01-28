@@ -20,7 +20,7 @@ data_files = package_files('./kniznica/model/trained_models')
 
 setup(
     name="predict",
-    version="0.2",
+    version="0.3dev",
     author="J. Matuska",
     url="https://github.com/j-matuska/predict_SchNet",
     #packages=find_packages("."),
