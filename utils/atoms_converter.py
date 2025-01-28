@@ -51,7 +51,7 @@ def main(args):
         devices=1, # all devices; 'auto' = based on accerelator; [int,..] list of indicies of the devices
         strategy="auto",
         logger=False,
-        accelerator='auto',
+        accelerator='cpu',
         enable_progress_bar=False
     )
     
