@@ -48,17 +48,11 @@ class AtomsConverterDatamodule(torch.utils.data.DataLoader):
             ):
         super().__init__(
             self,
-            self.inputs,
-            batch_size = self.batch_size,
-            num_workers = self.num_workers,
-            shuffle = self.shuffle,
-            pin_memory = self.pin_memory
+            inputs,
+            batch_size = batch_size,
+            num_workers = num_workers,
+            shuffle = shuffle,
+            pin_memory = pin_memory
             )
-        self.inputs = inputs
-        self.batch_size = batch_size
-        self.shuffle = shuffle
-        self.sampler = sampler
-        self.batch_sampler = batch_sampler
-        self.num_workers = num_workers
-        self.pin_memory = pin_memory
+
 
