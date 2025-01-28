@@ -12,11 +12,11 @@ from torch.utils.data import Dataset, Sampler
 import schnetpack.transform
 from schnetpack.interfaces import AtomsConverter
 
-import lightning
+import pytorch_lightning
 
 from typing import Optional, Sequence
 
-class AtomsConverterModule(lightning.LightningModule):
+class AtomsConverterModule(pytorch_lightning.LightningModule):
     
     def __init__(self, cutoff, device):
         super().__init__()
@@ -37,7 +37,7 @@ class AtomsConverterModule(lightning.LightningModule):
     def predict_step(self, inputs):
         return self.converter(inputs)
     
-class AtomsConverterDatamodule(lightning.LightningDataModule):
+class AtomsConverterDatamodule(pytorch_lightning.LightningDataModule):
     def __init__(
             self,
             inputs,
