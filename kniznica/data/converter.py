@@ -47,7 +47,6 @@ class AtomsConverterDatamodule(torch.utils.data.DataLoader):
             pin_memory: bool = False
             ):
         super().__init__(
-            self,
             inputs,
             batch_size = batch_size,
             num_workers = num_workers,
