@@ -38,15 +38,9 @@ def main(args):
     
     atoms = load_xyz(xyz_name)
     
-    datamodule = AtomsConverterDatamodule(
-        atoms,
-        batch_size = 100,
-        num_workers = 4,
-        )
-    
     model = AtomsConverterModule(5.0, device)
 
-    prediction = model(datamodule)
+    prediction = model(list(atoms))
     
     print(prediction)
 
