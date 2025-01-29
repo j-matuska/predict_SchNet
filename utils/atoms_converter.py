@@ -14,7 +14,7 @@ import pytorch_lightning
 
 
 from kniznica.parser.predict import parse_cmd
-from kniznica.data.converter import AtomsConverterModule, AtomsConverterDatamodule
+from kniznica.data.converter import AtomsConverterModule, AtomsConverterModuleSerial
 from kniznica.data.ASE import load_xyz
 
 
@@ -36,13 +36,36 @@ def main(args):
     cpu_model = platform.processor()
     logging.info('{} \n'.format(cpu_model))
     
+    stime = time.time()
+    logging.info("Start time: {}".format(stime)) 
     atoms = load_xyz(xyz_name)
+    etime = time.time()
+    logging.info("End time: {}".format(etime)) 
+    logging.info("Run time: {}".format(etime-stime))
+    
+    stime = time.time()
+    logging.info("Start time: {}".format(stime)) 
     
     model = AtomsConverterModule(5.0, device)
 
     prediction = model(list(atoms))
     
+    logging.info("End time: {}".format(etime)) 
+    logging.info("Run time: {}".format(etime-stime))
     print(prediction)
+    
+    stime = time.time()
+    logging.info("Start time: {}".format(stime)) 
+    
+    modelSerial = AtomsConverterModuleSerial(5.0, device)
+
+    predictionSerial = modelSerial(list(atoms))
+    
+    logging.info("End time: {}".format(etime)) 
+    logging.info("Run time: {}".format(etime-stime))
+    print(predictionSerial)
+    
+    print(prediction==predictionSerial)
 
 if __name__ == '__main__':
     args = parse_cmd()

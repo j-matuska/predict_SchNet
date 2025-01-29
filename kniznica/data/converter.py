@@ -38,6 +38,21 @@ class AtomsConverterModule:
         pool.join()
         return outputs
     
+class AtomsConverterModuleSerial:
+    
+    def __init__(self, cutoff, device):
+        super().__init__()
+        self.converter = AtomsConverter(
+            neighbor_list = schnetpack.transform.MatScipyNeighborList(cutoff = cutoff), # alternative: ASENeighborList(cutoff = cutoff), 
+            transforms = [
+                schnetpack.transform.SubtractCenterOfMass()
+                ],
+            device = device,
+            dtype=torch.float32
+            ) # converter to translate ASE atoms to Schnetpack input
+        
+    def __call__(self, inputs):
+        return self.converter(inputs)
     
 class AtomsConverterDatamodule(torch.utils.data.DataLoader):
     def __init__(
