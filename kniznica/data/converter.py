@@ -14,9 +14,11 @@ from schnetpack.interfaces import AtomsConverter
 
 import pytorch_lightning
 
+import multiprocessing
+
 from typing import Optional, Sequence
 
-class AtomsConverterModule(pytorch_lightning.LightningModule):
+class AtomsConverterModule:
     
     def __init__(self, cutoff, device):
         super().__init__()
@@ -29,11 +31,13 @@ class AtomsConverterModule(pytorch_lightning.LightningModule):
             dtype=torch.float32
             ) # converter to translate ASE atoms to Schnetpack input
         
-    def forward(self, inputs):
-        return self.converter(inputs)
+    def __call__(self, inputs):
+        pool = multiprocessing.Pool()
+        outputs = pool.map(self.converter, inputs)
+        pool.close()
+        pool.join()
+        return outputs
     
-    def predict_step(self, inputs):
-        return self.converter(inputs)
     
 class AtomsConverterDatamodule(torch.utils.data.DataLoader):
     def __init__(

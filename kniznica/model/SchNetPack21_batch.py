@@ -35,7 +35,6 @@ class trained_NN21:
     def predict(self, dataloader):
         
         n_mol = len(dataloader)
-        #property_list = [{} for i in range(n_mol)]
         print(n_mol)
                 
         trainer = pytorch_lightning.Trainer(
@@ -62,33 +61,23 @@ class trained_NN21:
                 # print(a)
                 # print(type(a))
                 pp.extend(a["DS"].numpy().tolist())
-
-            #pp = torch.cat([ a["DS"] for a in predicted_property])
-
-            #predicted_property = model.results['DS'].detach().cpu().numpy()
                 
             # add name to dictionary
             #identifier = str(atoms[i].info['name'])
             #property_list[i]["name"] = identifier
             
             # add prediction to dictionary; this is impossible with dataloader
-            # property_list = []
-            # for a,p in zip(atoms,pp):
-            #     property_list.append(
-            #         {
-            #             "name" : str(a.info['name']),
-            #             split  : p
-            #         }
-            #     )
+            property_list = []
+            for a,p in zip(atoms,pp):
+                property_list.append(
+                    {
+                        "name" : str(a.info['name']),
+                        split  : p
+                    }
+                )
                 
         return pp
 
-    # def load_model(self, s: str):
-    
-    #     if self.modelname == "Schnet20_6_10Ang_train80":
-    #         modelpath = "/home/matuska/BACOVBEAT3_lowcharge/Schnet/6/80_{s}b".format(s = s) #format(modelname = self.modelname, s = s)
-        
-    #     return torch.load(modelpath+'/best_model', map_location = torch.device(self.device))
     
 class pytorch_lightning_model_wrapper(pytorch_lightning.LightningModule):
     
@@ -125,29 +114,9 @@ class pytorch_lightning_model_wrapper(pytorch_lightning.LightningModule):
             self.model.get_submodule("representation").electronic_embeddings = []
             print("Variable 'electronic_embeddings' is defined and declared as empty list(). ")
         
-    # def predict_step(self, batch):
-    #     inputs, target = batch
-    #     return self.model(inputs, target)
     
     def forward(self, inputs):
         return self.model(inputs)
     
-    # def predict_step(self, batch, batch_idx, dataloader_idx=0):
-        
-    #     p = self(batch)
-    #     self.results.append(p)
-        
-    #     return p
-    
-    # def on_predict_epoch_end(self):
-        
-    #     pp = torch.cat(self.results)
-
-    #     # Now gather everything
-    #     pp = self.all_gather(pp)
-
-    #     # Reshape to remove the num_processes dimension.
-    #     # NOTE: order is likely not going to match dataloader order
-    #     self.results["DS"] = torch.flatten(pp, 0, -1).detach().cpu().numpy()
         
     
