@@ -32,7 +32,7 @@ class AtomsConverterModule:
             ) # converter to translate ASE atoms to Schnetpack input
         
     def __call__(self, inputs):
-        pool = multiprocessing.Pool()
+        pool = multiprocessing.Pool(processes=4)
         outputs = pool.map(self.converter, inputs)
         pool.close()
         pool.join()
