@@ -8,7 +8,7 @@ Created on Thu Mar 21 09:44:40 2024
 
 import os
 
-def get_models_configuration():
+def get_models_configuration(modelname):
 
     configuration = {
     "Schnet20_6_10Ang_train80" : {
@@ -74,10 +74,14 @@ def get_models_configuration():
     "pdbqt_M4_Schnet20_6_5Ang_train80" : {
         "model_dir": "trained_models/pdbqt_M4_Schnet20_6_5Ang_train80/", 
         "cutoff": 5.0
+        },
+    "current" : {
+        "model_dir": ".", 
+        "cutoff": 5.0
         }
     } 
     
-    return configuration
+    return configuration[modelname]
 
 def get_model_properties(modelname: str):
     
@@ -88,13 +92,14 @@ def get_model_properties(modelname: str):
     #with open(json_models_configuration,"r") as r:
     #   models_configuration = json.load(r)
     
-    models_configuration = get_models_configuration()
+    model_conf = get_models_configuration(modelname)
     
-    model_conf = models_configuration[modelname]
+    if model_conf["model_dir"] == "." : 
+        model_dir =  model_conf["model_dir"]
+    else:
+        dirname = os.path.dirname(__file__)
+        model_dir = os.path.join(dirname, model_conf["model_dir"])
     
-    dirname = os.path.dirname(__file__)
-    
-    model_dir = os.path.join(dirname, model_conf["model_dir"])
     cutoff = model_conf["cutoff"]
     
     return model_dir, cutoff
