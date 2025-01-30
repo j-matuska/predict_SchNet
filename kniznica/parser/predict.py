@@ -28,7 +28,8 @@ def parse_cmd():
                                    'pdbqt_M3_PaiNN20_3_5Ang_train80', 
                                    'pdbqt_M3_Schnet20_6_5Ang_train80', 
                                    'pdbqt_M4_PaiNN20_3_5Ang_train80', 
-                                   'pdbqt_M4_Schnet20_6_5Ang_train80'],
+                                   'pdbqt_M4_Schnet20_6_5Ang_train80',
+                                   'current'],
                         required = False,
                         help = "Optional choise of the pretrained NN model. Default: 'Schnet20_6_10Ang_train80' ",
                         metavar = "MODEL"
