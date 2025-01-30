@@ -35,6 +35,18 @@ def parse_cmd():
                         metavar = "MODEL"
                         )
     
+    # choise predicted variable; name of the variable have to be identical to name in XYZ file
+    parser.add_argument("--target", 
+                        action = 'store',
+                        #nargs = '+',
+                        default = "DS",
+                        type = str,
+                        #choices = [ '01', '02', '03', '04', '05'],
+                        required = False,
+                        help = "Choise of variable name to predict (target name). Necessary in case of hte 'custom' model. Name have to be identical to name in XYZ file and custom model. Default: 'DS' ",
+                        metavar = "TARGET"
+                        )
+    
     # choise split, default = all, but possibility to choose only one split
     parser.add_argument("--splits", 
                         action = 'store',

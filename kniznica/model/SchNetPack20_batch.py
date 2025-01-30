@@ -19,10 +19,11 @@ class extended_model:
 
 class trained_NN:
     
-    def __init__(self, model_dir: str, splits: str, cutoff: float, device = 'cpu'):
+    def __init__(self, model_dir: str, splits: str, cutoff: float, target: str, device = 'cpu'):
         self.model_dir = model_dir
         self.splits = splits
         self.cutoff = cutoff
+        self.target = target
         self.device = device
         self.converter = AtomsConverter(
             neighbor_list = schnetpack.transform.MatScipyNeighborList(cutoff = self.cutoff), # alternative: ASENeighborList(cutoff = cutoff), 
@@ -79,7 +80,7 @@ class trained_NN:
             for a in predicted_property:
                 # print(a)
                 # print(type(a))
-                pp.extend(a["DS"].numpy().tolist())
+                pp.extend(a[self.target].numpy().tolist())
 
             #pp = torch.cat([ a["DS"] for a in predicted_property])
 

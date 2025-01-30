@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-def collate_expected_predicted(expected:list , predicted:list, split:str):
+def collate_expected_predicted(expected:list , predicted:list, split:str, target:str):
     
     property_list = []
     
@@ -19,14 +19,14 @@ def collate_expected_predicted(expected:list , predicted:list, split:str):
         if e["name"] == p["name"]:
             property_list.append(
                 {"name" : e["name"],
-                 "expected" : e["DS"],
+                 "expected" : e[target],
                  "predicted" : p[split]
                  }
                 )
     
     return property_list
 
-def collate_expected_predicted_all(expected:list , predicted:list):
+def collate_expected_predicted_all(expected:list , predicted:list, target:str):
     
     property_list = []
     
@@ -44,7 +44,7 @@ def collate_expected_predicted_all(expected:list , predicted:list):
         if e["name"] == p["name"]:
         
             property_item = { "name" : e["name"],
-                              "expected" : e["DS"],
+                              "expected" : e[target],
                             }
                             
             for key in p.keys():

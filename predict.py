@@ -44,10 +44,10 @@ def main(args):
     logging.info('{} - Number of molecules: {}'.format(xyz_name, num_mol))
     
     # define properties of model
-    model_dir, cutoff = get_model_properties(modelname)
+    model_dir, cutoff, target = get_model_properties(modelname, args)
     
     # load NN from config
-    NNs = trained_NN(model_dir, splits, cutoff, device = device)
+    NNs = trained_NN(model_dir, splits, cutoff, target, device = device)
     
     start_time = time.time()
     logging.info("Start time: {}".format(start_time)) 
@@ -76,7 +76,7 @@ def main(args):
         
         expected_list = get_expected(atoms)
             
-        ep = collate_expected_predicted_all(expected_list, predictions)
+        ep = collate_expected_predicted_all(expected_list, predictions, target)
             
         name0=os.path.splitext(os.path.split(xyz_name)[-1])[-2]
         csv_name = '{}_{}.csv'.format(name0, modelname)
