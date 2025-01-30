@@ -74,7 +74,7 @@ def main(args):
 
     elif output_format == "expected_predicted":
         
-        expected_list = get_expected(atoms)
+        expected_list = get_expected(atoms, target)
             
         ep = collate_expected_predicted_all(expected_list, predictions, target)
             
