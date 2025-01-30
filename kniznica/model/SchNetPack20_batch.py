@@ -132,11 +132,13 @@ class pytorch_lightning_model_wrapper(pytorch_lightning.LightningModule):
             )
         
         # modification to fit model of older SchNetPack 2.0.1 to newer SchNetPack 2.1.1
-        schnet_parameters = inspect.getfullargspec(schnetpack.representation.SchNet)[0]
+        # schnet_parameters = inspect.getfullargspec(schnetpack.representation.SchNet)[0]
         #print(schnet_parameters)
-        if 'electronic_embeddings' in schnet_parameters:
-            self.model.get_submodule("representation").electronic_embeddings = []
-            print("Variable 'electronic_embeddings' is defined and declared as list(). ")
+        # if 'electronic_embeddings' in schnet_parameters:
+        #     self.model.get_submodule("representation").electronic_embeddings = []
+        #     print("Variable 'electronic_embeddings' is defined and declared as list(). ")
+        if not hasattr(self.model.representation, "electronic_embeddings"):
+            self.model.representation.electronic_embeddings = []
         
     # def predict_step(self, batch):
     #     inputs, target = batch
