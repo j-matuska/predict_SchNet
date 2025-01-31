@@ -22,10 +22,6 @@ Download program
 git clone https://github.com/j-matuska/predict_SchNet.git <dest_dir>
 cd <dest_dir>
 ```
-Install requirements (obsolete)
-```
-pip install -r requirements.txt
-```
 Install program
 ```
 pip install .
@@ -39,16 +35,20 @@ source ~/.predict_SchNetPack/bin/activate
 
 Call predict.py
 ``` 
-python3 /path/to/predict.py [-h] [--model MODEL] [--splits  '01 ...',] [--device DEVICE] [--output FORMAT] XYZ file
+predict.py [-h] [--model MODEL] [--target TARGET] [--splits  '01 ...',] [--mode MODE] [--output FORMAT] XYZ file
+
+Process comand-line inputs for predict.py.
 
 positional arguments:
   XYZ file              Full name of xyz file in extended xyz file format containing structure of the molecules.
 
 options:
   -h, --help            show this help message and exit
-  --model MODEL         Optional choise of the pretrained NN model. Default: 'Schnet03_6_10Ang_train80'
+  --model MODEL         Optional choise of the pretrained NN model. Default: 'Schnet20_6_10Ang_train80'
+  --target TARGET       Choise of variable name to predict (target name). Necessary in case of hte 'custom' model. Name have to be identical to name in XYZ file and custom model. Default: 'DS'
   --splits  '01 ...',   Optional choise of cross-validation instance from the pretrained NN model. Separated by space. Default: '01 02 03 04 05'
-  --device DEVICE       Optional choise of the computer resource. Default: 'cpu'
+  --mode MODE           Optional choise of the computer resources. Mode 'serial' allocate 4 cpu and one graphic card. Mode 'parallel' aim to take all possible graphic cards (not fully functional).
+                        Default: 'serial'
   --output FORMAT       Optional choise of the output format. Default: 'predicted'
 ```
 This can be showed by `python3 /path/to/predict.py -h`

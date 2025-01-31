@@ -37,7 +37,8 @@ setup(
         '' : data_files
         },
     scripts=[
-        "predict.py"
+        "predict.py",
+        "merge.py"
         ],
     python_requires=">=3.6",
     install_requires=[
