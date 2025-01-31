@@ -13,8 +13,9 @@ def load_csv(csv_name):
     with open(csv_name, 'r') as csvsubor:
         
         citac = csv.DictReader(csvsubor, delimiter=';')
+        list_of_dict = [c for c in citac]
     
-    return citac
+    return list_of_dict
 
 def load_csvs(csv_name : str, splits: list()):
     """
@@ -64,4 +65,4 @@ def fill_empty_predictions(predictions0, splits):
             if s not in p.keys():
                 p[s]=""
     
-    return predictions
+    return predictions0
