@@ -27,7 +27,7 @@ def main(args):
     output_format = args.output
     target = args.target
     
-    logging.basicConfig(level = logging.INFO, filename='{}.log'.format(modelname), filemode='a', force=True)
+    logging.basicConfig(level = logging.INFO, filename='{}.log'.format("merge"), filemode='a', force=True)
     logging.info(' \n' )
     logging.info(' ============================================= \n' )
     logging.info(args)
