@@ -46,18 +46,20 @@ def load_csvs(csv_name : str, splits: list()):
 def collate_csvs(expected_list, prediction_tmp):
     
     n_mol = len(expected_list)
-    predictions = [{"name": e["name"]} for e in expected_list]
-    for split_p in prediction_tmp:
-        for p in split_p:
-            for key in p.keys():
-                if key != "name":
-                    predictions[key] = p[key]
+    predictions0 = [{"name": e["name"]} for e in expected_list]
+    for p0 in predictions0:
+        for split_p in prediction_tmp:
+            for p in split_p:
+                if p0["name"] == p["name"]:
+                    for key in p.keys():
+                        if key != "name":
+                            p0[key] = p[key]
     
-    return predictions
+    return predictions0
 
-def fill_empty_predictions(predictions, splits):
+def fill_empty_predictions(predictions0, splits):
     
-    for p in predictions:
+    for p in predictions0:
         for s in splits:
             if s not in p.keys():
                 p[s]=""

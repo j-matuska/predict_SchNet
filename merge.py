@@ -12,7 +12,7 @@ import os
 
 from kniznica.parser.merge import parse_cmd
 from kniznica.data.ASE import load_xyz, get_expected
-from kniznica.data.CSV import load_csvs, collate_csvs
+from kniznica.data.CSV import load_csvs, collate_csvs, fill_empty_predictions
 from kniznica.output.conversions import collate_expected_predicted_all
 from kniznica.output.csv import write_csv
 
@@ -52,7 +52,8 @@ def main(args):
     predictions_tmp = load_csvs(csv_name, splits)
     
     # reformat to output structure
-    predictions = collate_csvs(predictions_tmp)
+    predictions0 = collate_csvs(expected_list, predictions_tmp)
+    predictions = fill_empty_predictions(predictions0, splits)
     
     stop_time = time.time()
     logging.info("End time: {}".format(stop_time))
