@@ -22,7 +22,6 @@ def main(args):
     device = 'cpu'
     csv_name = args.csvfile
     mode = args.mode
-    modelname = args.model
     splits = args.splits
     xyz_name = args.xyz_file.name
     output_format = args.output
@@ -65,7 +64,7 @@ def main(args):
     if output_format == "predicted":
         
         name0=os.path.splitext(os.path.split(xyz_name)[-1])[-2]
-        csv_name = '{}_{}.csv'.format(name0, modelname)
+        csv_name = '{}_{}.csv'.format(name0, "merge")
         
         logging.info('Writing predictions to file {} ...'.format(csv_name))
         write_csv(csv_name, predictions)
@@ -77,7 +76,7 @@ def main(args):
         ep = collate_expected_predicted_all(expected_list, predictions, target)
             
         name0=os.path.splitext(os.path.split(xyz_name)[-1])[-2]
-        csv_name = '{}_{}.csv'.format(name0, modelname)
+        csv_name = '{}_{}.csv'.format(name0, "merge")
             
         logging.info('Writing predictions to file {} ...'.format(csv_name))
         write_csv(csv_name, ep)
