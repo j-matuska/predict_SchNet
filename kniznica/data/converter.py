@@ -38,6 +38,8 @@ class AtomsConverterModule:
         pool.join()
         c_outputs = {}
         for key in outputs[0].keys():
+            if "_idx" in key and "local" not in key:
+                temp = tuple([stream[key].add(i*4) for i,stream in enumerate(outputs)])
             temp = tuple([stream[key] for stream in outputs])
             #print(temp)
             c_outputs[key] = torch.cat(temp, dim = 0 )
