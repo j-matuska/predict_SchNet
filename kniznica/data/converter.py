@@ -39,7 +39,7 @@ class AtomsConverterModule:
         c_outputs = {}
         for key in outputs[0].keys():
             if "_idx" in key and "local" not in key:
-                temp = tuple([stream[key].add(i*4) for i,stream in enumerate(outputs)])
+                temp = tuple([stream[key].add(i*len(inputs)//4) for i,stream in enumerate(outputs)])
             else:
                 temp = tuple([stream[key] for stream in outputs])
             #print(temp)
