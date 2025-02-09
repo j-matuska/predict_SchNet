@@ -36,7 +36,10 @@ class AtomsConverterModule:
         outputs = pool.map(self.converter, inputs)
         pool.close()
         pool.join()
-        return outputs
+        c_outputs = {}
+        for key in outputs[0].keys():
+            c_outputs[key] = torch.cat((stream[key] for stream in outputs), dim = 0 )
+        return c_outputs
     
 class AtomsConverterModuleSerial:
     
