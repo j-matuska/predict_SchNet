@@ -55,6 +55,7 @@ def collate_csvs(expected_list, prediction_tmp):
                     for key in p.keys():
                         if key != "name":
                             p0[key] = p[key]
+                    break # a litle bit of speed. No need to continue if record is found
     
     return predictions0
 
