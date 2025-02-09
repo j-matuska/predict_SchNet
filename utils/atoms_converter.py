@@ -52,7 +52,9 @@ def main(args):
     
     logging.info("End time: {}".format(etime)) 
     logging.info("Run time: {}".format(etime-stime))
-    print(prediction)
+    for key in prediction.keys():
+        print(key)
+        print(prediction[key])
     
     stime = time.time()
     logging.info("Start time: {}".format(stime)) 
@@ -63,9 +65,12 @@ def main(args):
     
     logging.info("End time: {}".format(etime)) 
     logging.info("Run time: {}".format(etime-stime))
-    print(predictionSerial)
-    
-    print(prediction==predictionSerial)
+    for key in predictionSerial.keys():
+        print(key)
+        print(predictionSerial[key])
+        
+    for key in prediction.keys():
+        print((prediction[key]==predictionSerial[key]).all())
 
 if __name__ == '__main__':
     args = parse_cmd()

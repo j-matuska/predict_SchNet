@@ -39,6 +39,7 @@ class AtomsConverterModule:
         c_outputs = {}
         for key in outputs[0].keys():
             temp = tuple([stream[key] for stream in outputs])
+            #print(temp)
             c_outputs[key] = torch.cat(temp, dim = 0 )
         return c_outputs
     
