@@ -38,7 +38,7 @@ class AtomsConverterModule:
         pool.join()
         c_outputs = {}
         for key in outputs[0].keys():
-            temp = (stream[key] for stream in outputs)
+            temp = tuple([stream[key] for stream in outputs])
             c_outputs[key] = torch.cat(temp, dim = 0 )
         return c_outputs
     
