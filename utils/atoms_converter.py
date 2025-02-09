@@ -62,13 +62,13 @@ def main(args):
     
     logging.info("End time: {}".format(etime)) 
     logging.info("Run time: {}".format(etime-stime))
-    for key in ["_idx_j", "_idx_j"]:
+    for key in ["_idx_j", "_idx_i"]:
         print(key, predictionSerial[key].size(), prediction[key].size())
         print(predictionSerial[key])
         print(prediction[key])
         
     for key in prediction.keys():
-        print((prediction[key]==predictionSerial[key]).all())
+        print(key, (prediction[key]==predictionSerial[key]).all())
 
 if __name__ == '__main__':
     args = parse_cmd()
