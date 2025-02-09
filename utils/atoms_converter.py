@@ -62,7 +62,7 @@ def main(args):
     
     logging.info("End time: {}".format(etime)) 
     logging.info("Run time: {}".format(etime-stime))
-    for key in ["_idx_j", "_idx_i"]:
+    for key in ["_idx_j", "_idx_i", "_idx", "_idx_m"]:
         print(key, predictionSerial[key].size(), prediction[key].size())
         print(predictionSerial[key])
         print(prediction[key])
