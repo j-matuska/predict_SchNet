@@ -19,7 +19,7 @@ def package_files(directory):
 data_files = package_files('./kniznica/model/trained_models')
 
 setup(
-    name="predict_dev",
+    name="predict",
     version="0.3dev",
     author="J. Matuska",
     url="https://github.com/j-matuska/predict_SchNet",
@@ -37,7 +37,7 @@ setup(
         '' : data_files
         },
     scripts=[
-        "predict_dev.py"
+        "predict.py"
         ],
     python_requires=">=3.6",
     install_requires=[
