@@ -36,14 +36,50 @@ class AtomsConverterModule:
         outputs = pool.map(self.converter, inputs)
         pool.close()
         pool.join()
-        c_outputs = {}
-        for key in outputs[0].keys():
-            if False: # "_idx" in key and "local" not in key:
-                temp = tuple([stream[key].add(i*len(inputs)//4) for i,stream in enumerate(outputs)])
-            else:
-                temp = tuple([stream[key] for stream in outputs])
-            #print(temp)
-            c_outputs[key] = torch.cat(temp, dim = 0 )
+        c_outputs = outputs[0]
+        for i,stream in enumerate(outputs[1:]):
+            for key in outputs[0].keys():
+                if "_idx" == key:
+                    c_outputs[key] = torch.cat(
+                        (
+                            c_outputs[key], 
+                            stream[key].add(i*len(inputs)//4)
+                            ),
+                        dim = 0 
+                        )
+                elif "_idx_m" == key:
+                    c_outputs[key] = torch.cat(
+                        (
+                            c_outputs[key], 
+                            stream[key].add(i*len(inputs)//4)
+                            ),
+                         dim = 0 
+                         )
+                elif "_idx_i" == key:
+                    c_outputs[key] = torch.cat(
+                        (
+                            c_outputs[key], 
+                            stream[key].add(torch.sum(c_outputs["_n_atoms"][:-1])[0])
+                            ), 
+                        dim = 0
+                        )
+                elif "_idx_m" == key:
+                    c_outputs[key] = torch.cat(
+                        (
+                            c_outputs[key], 
+                            stream[key].add(torch.sum(c_outputs["_n_atoms"][:-1])[0])
+                            ),
+                        dim = 0
+                        )
+                else:
+                    c_outputs[key] = torch.cat(
+                        (
+                            c_outputs[key],
+                            stream[key]
+                            ),
+                        dim = 0 
+                        )
+            
         return c_outputs
     
 class AtomsConverterModuleSerial:
