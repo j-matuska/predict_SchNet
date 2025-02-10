@@ -61,7 +61,7 @@ class AtomsConverterModule:
                     c_outputs[key] = torch.cat(
                         (
                             c_outputs[key], 
-                            outputs[i][key].add((i+1)*batch_size)
+                            outputs[i][key].add(i*batch_size)
                             ),
                         dim = 0 
                         )
@@ -69,7 +69,7 @@ class AtomsConverterModule:
                     c_outputs[key] = torch.cat(
                         (
                             c_outputs[key], 
-                            outputs[i][key].add((i+1)*batch_size)
+                            outputs[i][key].add(i*batch_size)
                             ),
                         dim = 0 
                         )
@@ -77,7 +77,7 @@ class AtomsConverterModule:
                     c_outputs[key] = torch.cat(
                         (
                             c_outputs[key], 
-                            outputs[i][key].add(torch.sum(c_outputs["_n_atoms"][:-batch_size]).item())
+                            outputs[i][key].add(torch.sum(c_outputs["_n_atoms"][:i*batch_size]).item())
                             ), 
                         dim = 0
                         )
@@ -85,7 +85,7 @@ class AtomsConverterModule:
                     c_outputs[key] = torch.cat(
                         (
                             c_outputs[key], 
-                            outputs[i][key].add(torch.sum(c_outputs["_n_atoms"][:-batch_size]).item())
+                            outputs[i][key].add(torch.sum(c_outputs["_n_atoms"][:i*batch_size]).item())
                             ),
                         dim = 0
                         )
