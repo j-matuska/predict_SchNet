@@ -31,7 +31,7 @@ class trained_NN:
         print(torch.get_num_interop_threads())
         # suradnicove vstupy z xyz; konverzia na vstup pre NN
         print(type(atoms))
-        print(list(atoms))
+        #print(list(atoms))
         print(type(list(atoms)))
         print(len(list(atoms)))
         inputs = self.converter(atoms)
