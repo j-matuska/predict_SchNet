@@ -20,8 +20,9 @@ from typing import Optional, Sequence
 
 class AtomsConverterModule:
     
-    def __init__(self, cutoff, device):
+    def __init__(self, cutoff, device, n_cpu = 4):
         super().__init__()
+        self.n_cpu = n_cpu
         self.converter = AtomsConverter(
             neighbor_list = schnetpack.transform.MatScipyNeighborList(cutoff = cutoff), # alternative: ASENeighborList(cutoff = cutoff), 
             transforms = [
@@ -32,9 +33,9 @@ class AtomsConverterModule:
             ) # converter to translate ASE atoms to Schnetpack input
         
     def __call__(self, inputs):
-        batch_size = len(inputs)//4
-        pool = multiprocessing.Pool(processes=4)
-        outputs = pool.imap(self.converter, inputs, batch_size)
+        batch_size = len(inputs)//self.n_cpu
+        pool = multiprocessing.Pool(processes=self.n_cpu)
+        outputs = pool.map(self.converter, inputs, chunksize=batch_size)
         pool.close()
         pool.join()
         c_outputs = outputs[0]
