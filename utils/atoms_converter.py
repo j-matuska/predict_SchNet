@@ -46,7 +46,7 @@ def main(args):
     stime = time.time()
     logging.info("Start time: {}".format(stime)) 
     
-    model = AtomsConverterModule(5.0, device, n_cpu = 4)
+    model = AtomsConverterModule(5.0, device, n_cpu = 8)
 
     prediction = model(list(atoms))
     
