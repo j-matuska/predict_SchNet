@@ -33,7 +33,9 @@ class AtomsConverterModule:
             ) # converter to translate ASE atoms to Schnetpack input
         
     def converter2(self, inputs, outputs):
+        print(inputs)
         outputs = self.converter(inputs)
+        print(outputs)
         
     def __call__(self, inputs):
         batch_size = len(inputs)//self.n_cpu
