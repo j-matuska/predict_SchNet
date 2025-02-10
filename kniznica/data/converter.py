@@ -40,10 +40,17 @@ class AtomsConverterModule:
         for i,stream in enumerate(outputs[1:]):
             for key in outputs[0].keys():
                 if "_idx" == key:
+                    # c_outputs[key] = torch.cat(
+                    #     (
+                    #         c_outputs[key], 
+                    #         stream[key].add((i+1)*(len(inputs)//4))
+                    #         ),
+                    #     dim = 0 
+                    #     )
                     c_outputs[key] = torch.cat(
                         (
                             c_outputs[key], 
-                            stream[key].add((i+1)*(len(inputs)//4))
+                            stream[key]
                             ),
                         dim = 0 
                         )
@@ -51,7 +58,7 @@ class AtomsConverterModule:
                     c_outputs[key] = torch.cat(
                         (
                             c_outputs[key], 
-                            stream[key].add((i+1)*((len(inputs))//4))
+                            stream[key]
                             ),
                          dim = 0 
                          )
