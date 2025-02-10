@@ -32,9 +32,9 @@ class AtomsConverterModule:
             dtype=torch.float32
             ) # converter to translate ASE atoms to Schnetpack input
         
-    def converter2(self, inputs, outputs):
+    def converter2(self, i, inputs, outputs):
         print(inputs)
-        outputs.append(self.converter(inputs))
+        outputs[i] = self.converter(inputs)
         print(outputs)
         
     def __call__(self, inputs):
@@ -46,22 +46,22 @@ class AtomsConverterModule:
         # pool.close()
         # pool.join()
         processes = []
-        outputs = multiprocessing.Manager().list()
+        outputs = multiprocessing.Manager().dict()
         for i in range(self.n_cpu):
-            p = multiprocessing.Process(target=self.converter2, args=(inputs[i*batch_size:(i+1)*batch_size],outputs))
+            p = multiprocessing.Process(target=self.converter2, args=(i,inputs[i*batch_size:(i+1)*batch_size],outputs))
             processes.append(p)
             p.start()
         for p in processes:
             p.join()
         print(outputs)
         c_outputs = outputs[0]
-        for i,stream in enumerate(outputs[1:]):
+        for i in range(1,self.n_cpu):
             for key in outputs[0].keys():
                 if "_idx" == key:
                     c_outputs[key] = torch.cat(
                         (
                             c_outputs[key], 
-                            stream[key].add((i+1)*batch_size)
+                            outputs[i][key].add((i+1)*batch_size)
                             ),
                         dim = 0 
                         )
@@ -69,7 +69,7 @@ class AtomsConverterModule:
                     c_outputs[key] = torch.cat(
                         (
                             c_outputs[key], 
-                            stream[key].add((i+1)*batch_size)
+                            outputs[i][key].add((i+1)*batch_size)
                             ),
                         dim = 0 
                         )
@@ -77,7 +77,7 @@ class AtomsConverterModule:
                     c_outputs[key] = torch.cat(
                         (
                             c_outputs[key], 
-                            stream[key].add(torch.sum(c_outputs["_n_atoms"][:-1]).item())
+                            outputs[i][key].add(torch.sum(c_outputs["_n_atoms"][:-batch_size]).item())
                             ), 
                         dim = 0
                         )
@@ -85,7 +85,7 @@ class AtomsConverterModule:
                     c_outputs[key] = torch.cat(
                         (
                             c_outputs[key], 
-                            stream[key].add(torch.sum(c_outputs["_n_atoms"][:-1]).item())
+                            outputs[i][key].add(torch.sum(c_outputs["_n_atoms"][:-batch_size]).item())
                             ),
                         dim = 0
                         )
@@ -93,7 +93,7 @@ class AtomsConverterModule:
                     c_outputs[key] = torch.cat(
                         (
                             c_outputs[key],
-                            stream[key]
+                            outputs[i][key]
                             ),
                         dim = 0 
                         )
