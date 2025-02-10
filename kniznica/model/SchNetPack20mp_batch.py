@@ -34,10 +34,10 @@ class trained_NN:
         #print(list(atoms))
         print(type(list(atoms)))
         print(len(list(atoms)))
-        inputs = self.converter(list(atoms))
+        inputs = self.converter(atoms)
         
         print(len(inputs))
-        print(inputs.keys())
+        #print(inputs.keys())
         
         dataloader = AtomsLoader(
                 inputs,

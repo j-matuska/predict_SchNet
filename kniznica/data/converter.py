@@ -29,11 +29,11 @@ class AtomsConverterModule:
             ) # converter to translate ASE atoms to Schnetpack input
         
     def converter2(self, i, inputs, outputs):
-        #print(inputs)
+        print(inputs)
         outputs[i] = []
         for item in inputs:
             outputs[i].append(self.converter(item))
-        #print(outputs)
+        print(outputs)
         
     def __call__(self, inputs):
         batch_size = len(inputs)//self.n_cpu
@@ -51,7 +51,7 @@ class AtomsConverterModule:
             p.start()
         for p in processes:
             p.join()
-        #print(outputs)
+        print(outputs)
         c_outputs = []
         for i in range(self.n_cpu+1):
             c_outputs.extend(outputs[i])
