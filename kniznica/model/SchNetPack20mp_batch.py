@@ -6,12 +6,6 @@ from schnetpack.data import AtomsLoader
 import pytorch_lightning
 
 
-class extended_model:
-    
-    def __init__(self, split, model ):
-        self.split = split
-        self.model = model
-
 class trained_NN:
     
     def __init__(self, model_dir: str, splits: str, cutoff: float, target: str, device = 'cpu'):
@@ -36,7 +30,11 @@ class trained_NN:
         print(torch.get_num_threads())
         print(torch.get_num_interop_threads())
         # suradnicove vstupy z xyz; konverzia na vstup pre NN
-        inputs = self.converter(list(atoms))
+        print(type(atoms))
+        print(list(atoms))
+        print(type(list(atoms)))
+        print(len(list(atoms)))
+        inputs = self.converter(atoms)
         
         print(len(inputs))
         
