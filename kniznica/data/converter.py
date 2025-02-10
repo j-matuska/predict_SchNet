@@ -32,14 +32,25 @@ class AtomsConverterModule:
             dtype=torch.float32
             ) # converter to translate ASE atoms to Schnetpack input
         
+    def converter2(self, inputs, outputs):
+        outputs = self.converter(inputs)
+        
     def __call__(self, inputs):
         batch_size = len(inputs)//self.n_cpu
-        pool = multiprocessing.Pool(processes=self.n_cpu)
-        print(inputs)
-        print(type(inputs))
-        outputs = pool.map(self.converter, inputs, chunksize=batch_size)
-        pool.close()
-        pool.join()
+        # pool = multiprocessing.Pool(processes=self.n_cpu)
+        # print(inputs)
+        # print(type(inputs))
+        # outputs = pool.map(self.converter, inputs, chunksize=batch_size)
+        # pool.close()
+        # pool.join()
+        processes = []
+        outputs = multiprocessing.Manager().list()
+        for i in range(self.n_cpu):
+            p = multiprocessing.Process(target=self.converter2, args=(inputs[i*batch_size:(i+1)*batch_size],outputs))
+            processes.append(p)
+            p.start()
+        for p in processes:
+            p.join()
         print(outputs)
         c_outputs = outputs[0]
         for i,stream in enumerate(outputs[1:]):
