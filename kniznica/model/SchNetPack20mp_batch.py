@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import torch
-from kniznica.data import AtomsConverterModule
+from kniznica.data.converter import AtomsConverterModule
 from schnetpack.data import AtomsLoader
 import schnetpack.transform
 import pytorch_lightning
