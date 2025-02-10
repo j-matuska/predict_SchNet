@@ -30,7 +30,9 @@ class AtomsConverterModule:
         
     def converter2(self, i, inputs, outputs):
         #print(inputs)
-        outputs[i] = self.converter(inputs)
+        outputs[i] = []
+        for item in inputs:
+            outputs[i].append(self.converter(item))
         #print(outputs)
         
     def __call__(self, inputs):
@@ -50,49 +52,52 @@ class AtomsConverterModule:
         for p in processes:
             p.join()
         #print(outputs)
-        c_outputs = outputs[0]
-        for i in range(1,self.n_cpu+1):
-            for key in outputs[0].keys():
-                if "_idx" == key:
-                    c_outputs[key] = torch.cat(
-                        (
-                            c_outputs[key], 
-                            outputs[i][key].add(i*batch_size)
-                            ),
-                        dim = 0 
-                        )
-                elif "_idx_m" == key:
-                    c_outputs[key] = torch.cat(
-                        (
-                            c_outputs[key], 
-                            outputs[i][key].add(i*batch_size)
-                            ),
-                        dim = 0 
-                        )
-                elif "_idx_i" == key:
-                    c_outputs[key] = torch.cat(
-                        (
-                            c_outputs[key], 
-                            outputs[i][key].add(torch.sum(c_outputs["_n_atoms"][:i*batch_size]).item())
-                            ), 
-                        dim = 0
-                        )
-                elif "_idx_j" == key:
-                    c_outputs[key] = torch.cat(
-                        (
-                            c_outputs[key], 
-                            outputs[i][key].add(torch.sum(c_outputs["_n_atoms"][:i*batch_size]).item())
-                            ),
-                        dim = 0
-                        )
-                else:
-                    c_outputs[key] = torch.cat(
-                        (
-                            c_outputs[key],
-                            outputs[i][key]
-                            ),
-                        dim = 0 
-                        )
+        c_outputs = []
+        for i in range(self.n_cpu+1):
+            c_outputs.extend(outputs[i])
+        # c_outputs = outputs[0]    
+        # for i in range(1,self.n_cpu+1):
+        #     for key in outputs[0].keys():
+        #         if "_idx" == key:
+        #             c_outputs[key] = torch.cat(
+        #                 (
+        #                     c_outputs[key], 
+        #                     outputs[i][key].add(i*batch_size)
+        #                     ),
+        #                 dim = 0 
+        #                 )
+        #         elif "_idx_m" == key:
+        #             c_outputs[key] = torch.cat(
+        #                 (
+        #                     c_outputs[key], 
+        #                     outputs[i][key].add(i*batch_size)
+        #                     ),
+        #                 dim = 0 
+        #                 )
+        #         elif "_idx_i" == key:
+        #             c_outputs[key] = torch.cat(
+        #                 (
+        #                     c_outputs[key], 
+        #                     outputs[i][key].add(torch.sum(c_outputs["_n_atoms"][:i*batch_size]).item())
+        #                     ), 
+        #                 dim = 0
+        #                 )
+        #         elif "_idx_j" == key:
+        #             c_outputs[key] = torch.cat(
+        #                 (
+        #                     c_outputs[key], 
+        #                     outputs[i][key].add(torch.sum(c_outputs["_n_atoms"][:i*batch_size]).item())
+        #                     ),
+        #                 dim = 0
+        #                 )
+        #         else:
+        #             c_outputs[key] = torch.cat(
+        #                 (
+        #                     c_outputs[key],
+        #                     outputs[i][key]
+        #                     ),
+        #                 dim = 0 
+        #                 )
             
         return c_outputs
     
