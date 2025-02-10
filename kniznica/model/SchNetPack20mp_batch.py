@@ -3,7 +3,6 @@
 import torch
 from kniznica.data.converter import AtomsConverterModule
 from schnetpack.data import AtomsLoader
-import schnetpack.transform
 import pytorch_lightning
 
 
@@ -15,7 +14,7 @@ class extended_model:
 
 class trained_NN:
     
-    def __init__(self, model_dir: str, splits: str, cutoff: float, target: str, n_cpu: int, device = 'cpu'):
+    def __init__(self, model_dir: str, splits: str, cutoff: float, target: str, device = 'cpu'):
         self.model_dir = model_dir
         self.splits = splits
         self.cutoff = cutoff
