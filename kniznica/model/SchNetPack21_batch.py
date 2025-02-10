@@ -22,6 +22,7 @@ class trained_NN:
         self.model_dir = model_dir
         self.splits = splits
         self.cutoff = cutoff
+        self.target = target
         self.device = device
         self.converter = AtomsConverter(
             neighbor_list = schnetpack.transform.MatScipyNeighborList(cutoff = self.cutoff), # alternative: ASENeighborList(cutoff = cutoff), 

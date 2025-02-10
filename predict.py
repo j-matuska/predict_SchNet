@@ -37,7 +37,15 @@ def main(args):
     logging.info('{} \n'.format(cpu_model))
     
     # load molecules
+    start_time = time.time()
+    logging.info("XYZ load start time: {}".format(start_time)) 
+    
     atoms = load_xyz(xyz_name)
+    
+    stop_time = time.time()
+    logging.info("XYZ load end time: {}".format(stop_time))
+    
+    logging.info("XYZ load time: {}".format(stop_time-start_time)) 
 
     num_mol=len(atoms)
     print(xyz_name, 'Number of molecules: ',num_mol)
