@@ -30,12 +30,14 @@ class AtomsConverterModule:
         
     def converter2(self, i, inputs, outputs):
         print(inputs)
-        outputs[i] = []
+        data = []
         for item in inputs:
             print(i,item)
-            outputs[i].append(self.converter(item))
-            print(outputs[i])
-        
+            d = self.converter(item)
+            print(d)
+            data.append(d)
+            print(data)
+        outputs[i] = data
         
     def __call__(self, inputs):
         batch_size = len(inputs)//self.n_cpu
