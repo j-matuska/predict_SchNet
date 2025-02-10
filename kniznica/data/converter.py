@@ -34,7 +34,7 @@ class AtomsConverterModule:
         
     def converter2(self, inputs, outputs):
         print(inputs)
-        outputs = self.converter(inputs)
+        outputs.append(self.converter(inputs))
         print(outputs)
         
     def __call__(self, inputs):
