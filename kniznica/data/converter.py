@@ -38,6 +38,7 @@ class AtomsConverterModule:
         outputs = pool.map(self.converter, inputs, chunksize=batch_size)
         pool.close()
         pool.join()
+        print(outputs)
         c_outputs = outputs[0]
         for i,stream in enumerate(outputs[1:]):
             for key in outputs[0].keys():
