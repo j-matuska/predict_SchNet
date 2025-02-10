@@ -46,10 +46,11 @@ def main(args):
     stime = time.time()
     logging.info("Start time: {}".format(stime)) 
     
-    model = AtomsConverterModule(5.0, device)
+    model = AtomsConverterModule(5.0, device, n_cpu = 4)
 
     prediction = model(list(atoms))
     
+    etime = time.time()
     logging.info("End time: {}".format(etime)) 
     logging.info("Run time: {}".format(etime-stime))
     
@@ -60,8 +61,10 @@ def main(args):
 
     predictionSerial = modelSerial(list(atoms))
     
+    etime = time.time()
     logging.info("End time: {}".format(etime)) 
     logging.info("Run time: {}".format(etime-stime))
+    
     for key in ["_idx_j", "_idx_i", "_idx", "_idx_m"]:
         print(key, predictionSerial[key].size(), prediction[key].size())
         print(predictionSerial[key])
