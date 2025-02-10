@@ -32,8 +32,10 @@ class AtomsConverterModule:
         print(inputs)
         outputs[i] = []
         for item in inputs:
+            print(i,item)
             outputs[i].append(self.converter(item))
-        print(outputs)
+            print(outputs[i])
+        
         
     def __call__(self, inputs):
         batch_size = len(inputs)//self.n_cpu
@@ -46,7 +48,13 @@ class AtomsConverterModule:
         processes = []
         outputs = multiprocessing.Manager().dict()
         for i in range(self.n_cpu+1):
-            p = multiprocessing.Process(target=self.converter2, args=(i,inputs[i*batch_size:(i+1)*batch_size],outputs))
+            p = multiprocessing.Process(
+                target=self.converter2, 
+                args=(
+                    i,
+                    inputs[i*batch_size:(i+1)*batch_size],
+                    outputs)
+                )
             processes.append(p)
             p.start()
         for p in processes:
