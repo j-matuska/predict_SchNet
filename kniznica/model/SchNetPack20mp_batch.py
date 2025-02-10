@@ -18,7 +18,7 @@ class trained_NN:
             cutoff = self.cutoff,
             device = self.device,
             #n_cpu = n_cpu
-            n_cpu = torch.get_num_threads()-2
+            n_cpu = 8 #torch.get_num_threads()-2
             ) # converter to translate ASE atoms to Schnetpack input
 
     def predict(self, atoms):
