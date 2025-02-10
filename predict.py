@@ -12,7 +12,7 @@ import os
 
 from kniznica.parser.predict import parse_cmd
 from kniznica.data.ASE import load_xyz, get_expected
-from kniznica.model.SchNetPack20_batch import trained_NN
+from kniznica.model.SchNetPack20mp_batch import trained_NN
 #from kniznica.model.SchNetPack21_batch import trained_NN
 from kniznica.output.conversions import collate_expected_predicted_all
 from kniznica.output.csv import write_csv
