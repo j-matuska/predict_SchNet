@@ -34,7 +34,7 @@ class AtomsConverterModule:
     def __call__(self, inputs):
         batch_size = len(inputs)//4
         pool = multiprocessing.Pool(processes=4)
-        outputs = pool.map(self.converter, inputs, chunksize = batch_size)
+        outputs = pool.map(self.converter, inputs, batch_size)
         pool.close()
         pool.join()
         c_outputs = outputs[0]
