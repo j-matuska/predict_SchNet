@@ -47,7 +47,7 @@ class AtomsConverterModule:
         # pool.join()
         processes = []
         outputs = multiprocessing.Manager().dict()
-        for i in range(self.n_cpu):
+        for i in range(self.n_cpu+1):
             p = multiprocessing.Process(target=self.converter2, args=(i,inputs[i*batch_size:(i+1)*batch_size],outputs))
             processes.append(p)
             p.start()
@@ -55,7 +55,7 @@ class AtomsConverterModule:
             p.join()
         #print(outputs)
         c_outputs = outputs[0]
-        for i in range(1,self.n_cpu):
+        for i in range(1,self.n_cpu+1):
             for key in outputs[0].keys():
                 if "_idx" == key:
                     c_outputs[key] = torch.cat(
