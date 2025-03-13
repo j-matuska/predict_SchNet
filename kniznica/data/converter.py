@@ -40,13 +40,17 @@ class AtomsConverterModule:
         outputs[i] = data
         
     def __call__(self, inputs):
-        batch_size = len(inputs)//self.n_cpu
-        pool = multiprocessing.Pool(processes=self.n_cpu)
         #print(inputs)
         #print(type(inputs))
-        c_outputs = pool.map(self.converter, inputs, chunksize=batch_size)
-        pool.close()
-        pool.join()
+        # unelegant brute force limitation for memory
+        mmn = 2000
+        c_outputs = []
+        for i in range((len(inputs)//mmn)+1):
+            batch_size = mmn//self.n_cpu
+            pool = multiprocessing.Pool(processes=self.n_cpu)
+            c_outputs.extend(pool.map(self.converter, inputs[i*mmn:(i+1)*mmn], chunksize=batch_size))
+            pool.close()
+            pool.join()
         # processes = []
         # outputs = multiprocessing.Manager().dict()
         # for i in range(self.n_cpu+1):

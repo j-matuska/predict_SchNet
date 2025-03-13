@@ -77,7 +77,7 @@ def parse_cmd():
                         #nargs = 1,
                         default = 'predicted',
                         type = str,
-                        choices = ['predicted', 'expected_predicted'],
+                        choices = ['predicted', 'expected_predicted', 'ensemble_variance'],
                         required = False,
                         help = "Optional choise of the output format. Default: 'predicted' ",
                         metavar = "FORMAT"
