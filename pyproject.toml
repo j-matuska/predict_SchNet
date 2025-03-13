@@ -1,0 +1,117 @@
+[project]
+name="predict"
+version="0.2"
+dependencies=[
+        "ase>=3.22.1",
+        "matplotlib>=3.7.1",
+        "numpy>=1.24.2",
+        "pandas>=2.0.0",
+        "pytorch_lightning>=1.9.4",
+        "torch>=2.0.0"
+        ]
+description="predict.py - prediction of docking score by Schnet DTNN"
+authors=[{name = "J. Matuska"}]
+requires-python=">=3.6"
+
+[project.urls]
+Homepage="https://github.com/j-matuska/predict_SchNet"
+
+[tool.setuptool]
+packages=[
+        'kniznica',
+        'kniznica.parser',
+        'kniznica.data',
+        'kniznica.model',
+        'kniznica.output',
+        'kniznica.model.trained_models'
+        ]
+package-dir={"" = "."}
+
+[tool.setuptools.package-data]
+"*" = [
+ '.././kniznica/model/trained_models/pdbqt_M3+M2_Schnet20_6_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3+M2_Schnet20_6_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3+M2_Schnet20_6_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3+M2_Schnet20_6_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3+M2_Schnet20_6_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1+M2_Schnet20_6_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1+M2_Schnet20_6_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1+M2_Schnet20_6_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1+M2_Schnet20_6_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1+M2_Schnet20_6_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M4_Schnet20_6_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M4_Schnet20_6_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M4_Schnet20_6_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M4_Schnet20_6_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M4_Schnet20_6_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M4_PaiNN20_3_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M4_PaiNN20_3_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M4_PaiNN20_3_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M4_PaiNN20_3_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M4_PaiNN20_3_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3+M2_PaiNN20_3_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3+M2_PaiNN20_3_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3+M2_PaiNN20_3_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3+M2_PaiNN20_3_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3+M2_PaiNN20_3_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1_Schnet20_6_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1_Schnet20_6_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1_Schnet20_6_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1_Schnet20_6_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1_Schnet20_6_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M2_Schnet20_6_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M2_Schnet20_6_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M2_Schnet20_6_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M2_Schnet20_6_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M2_Schnet20_6_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/Schnet03_6_10Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/Schnet03_6_10Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/Schnet03_6_10Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/Schnet03_6_10Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/Schnet03_6_10Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3_Schnet20_6_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3_Schnet20_6_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3_Schnet20_6_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3_Schnet20_6_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3_Schnet20_6_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/Schnet20_6_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/Schnet20_6_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/Schnet20_6_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/Schnet20_6_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/Schnet20_6_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3_PaiNN20_3_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3_PaiNN20_3_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3_PaiNN20_3_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3_PaiNN20_3_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M3_PaiNN20_3_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/PaiNN20_3_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/PaiNN20_3_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/PaiNN20_3_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/PaiNN20_3_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/PaiNN20_3_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1+M2_PaiNN20_3_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1+M2_PaiNN20_3_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1+M2_PaiNN20_3_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1+M2_PaiNN20_3_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1+M2_PaiNN20_3_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/Schnet20_6_10Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/Schnet20_6_10Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/Schnet20_6_10Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/Schnet20_6_10Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/Schnet20_6_10Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1_PaiNN20_3_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1_PaiNN20_3_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1_PaiNN20_3_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1_PaiNN20_3_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M1_PaiNN20_3_5Ang_train80/02/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M2_PaiNN20_3_5Ang_train80/01/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M2_PaiNN20_3_5Ang_train80/04/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M2_PaiNN20_3_5Ang_train80/05/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M2_PaiNN20_3_5Ang_train80/03/best_model',
+ '.././kniznica/model/trained_models/pdbqt_M2_PaiNN20_3_5Ang_train80/02/best_model']
+
+[project.scripts]
+predict.py="predict.py"
+merge.py="merge.py"
+
+
