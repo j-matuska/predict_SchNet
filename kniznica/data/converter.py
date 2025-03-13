@@ -43,10 +43,10 @@ class AtomsConverterModule:
         #print(inputs)
         #print(type(inputs))
         # unelegant brute force limitation for memory
-        mmn = 2000
+        mmn = 1000
         c_outputs = []
         for i in range((len(inputs)//mmn)+1):
-            batch_size = mmn//self.n_cpu
+            batch_size = 100 #mmn//self.n_cpu
             pool = multiprocessing.Pool(processes=self.n_cpu)
             c_outputs.extend(pool.map(self.converter, inputs[i*mmn:(i+1)*mmn], chunksize=batch_size))
             pool.close()
