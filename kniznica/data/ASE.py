@@ -15,10 +15,9 @@ def get_expected(atoms: list, target: str):
     # else added to cover new version of ASE where "energy" is keyword and it is imported to core of Atoms object
     # in future modification to custom keyword have to be implemented
     try:
-        energy = atoms[0].get_total_energy()
-        expected_list = [ {"name": str(at.info["name"]), target: at.get_total_energy()} for at in atoms]
-    except:
         expected_list = [{"name": str(at.info["name"]), target: float(at.info[target])} for at in atoms]
+    except:
+        expected_list = [ {"name": str(at.info["name"]), target: at.get_total_energy()} for at in atoms]
         
     #expected_list = [{"name": str(at.info["name"]), "DS": float(at.info["energy"])} if "energy" in at.info else {"name": str(at.info["name"]), "DS": at.get_total_energy()} for at in atoms]
     
