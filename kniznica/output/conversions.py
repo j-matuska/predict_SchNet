@@ -69,3 +69,5 @@ def collate_ensemble_variance_target(expected_list:list, target:str):
                 "regression_property": el[target]
                 }
             )
+        
+    return output_list
