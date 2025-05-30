@@ -15,9 +15,9 @@ from kniznica.data.ASE import load_xyz, get_expected
 from kniznica.model.SchNetPack20_batch import trained_NN
 #from kniznica.model.SchNetPack20mp_batch import trained_NN
 #from kniznica.model.SchNetPack21_batch import trained_NN
-from kniznica.output.conversions import collate_expected_predicted_all
+from kniznica.output.conversions import collate_expected_predicted_all, collate_ensemble_variance_target
 from kniznica.output.stats import get_ensemble_variance
-from kniznica.output.csv import write_csv
+from kniznica.output.csv import write_csv, write_EPcsv
 from kniznica.model.configuration import get_model_properties
 
 
@@ -103,16 +103,18 @@ def main(args):
         csv_name = '{}_{}_{}.csv'.format(name0, modelname, "ensemble_variance")
             
         logging.info('Writing ensemble variance to file {} ...'.format(csv_name))
-        write_csv(csv_name, ensemble_variance_list)
+        write_EPcsv(csv_name, ensemble_variance_list)
             
         logging.info('Ensemble variance successfully stored in file {}'.format(csv_name))
         
         expected_list = get_expected(atoms, target)
         
+        expected_list2 = collate_ensemble_variance_target(expected_list, target)
+        
         csv_name = '{}_{}_{}.csv'.format(name0, modelname, "target")
             
         logging.info('Writing target to file {} ...'.format(csv_name))
-        write_csv(csv_name, expected_list)
+        write_EPcsv(csv_name, expected_list2)
             
         logging.info('Ensemble variance successfully stored in file {}'.format(csv_name))
     

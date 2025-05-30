@@ -56,3 +56,16 @@ def collate_expected_predicted_all(expected:list , predicted:list, target:str):
                 )
     
     return property_list
+
+def collate_ensemble_variance_target(expected_list:list, target:str):
+    
+    output_list = []
+    
+    for el in expected_list:
+        
+        output_list.append(
+            {
+                "ID": el["name"],
+                "regression_property": el[target]
+                }
+            )
