@@ -15,7 +15,7 @@ from kniznica.data.ASE import load_xyz, get_expected
 from kniznica.model.SchNetPack20_batch_feature_vector import trained_NN
 from kniznica.output.conversions import collate_expected_predicted_all, collate_ensemble_variance_target
 from kniznica.output.stats import get_ensemble_variance
-from kniznica.output.npz import write_npz
+from kniznica.output.pickle import write_pickle
 from kniznica.model.configuration import get_model_properties
 
 
@@ -74,12 +74,12 @@ def main(args):
     
     if output_format == "predicted":
         
-        npz_name = '{}_{}.npz'.format(name0, modelname)
+        pickle_name = '{}_{}.pickle'.format(name0, modelname)
         
-        logging.info('Writing predictions to file {} ...'.format(npz_name))
-        write_npz(npz_name, predictions)
+        logging.info('Writing predictions to file {} ...'.format(pickle_name))
+        write_pickle(pickle_name, predictions)
         
-        logging.info('Predictions successfully stored in file {}'.format(npz_name))
+        logging.info('Predictions successfully stored in file {}'.format(pickle_name))
     
     else:
         

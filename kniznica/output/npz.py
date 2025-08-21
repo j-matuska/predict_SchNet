@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# not fully working
+
 import numpy
 
 def write_npz(npzname: str, property_list: list):
