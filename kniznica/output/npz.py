@@ -8,7 +8,7 @@ def write_npz(npzname: str, property_list: list):
     for k,v in property_list[0].items():
         zaznam[k] = [v]
     
-    for p in property_list:
+    for p in property_list[1:]:
         for k,v in p.items():
             zaznam[k].append(v)
     
