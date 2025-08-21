@@ -38,7 +38,8 @@ setup(
         },
     scripts=[
         "predict.py",
-        "merge.py"
+        "merge.py",
+        "predict_feature_vector.py"
         ],
     python_requires=">=3.6",
     install_requires=[

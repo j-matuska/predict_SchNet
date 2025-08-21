@@ -13,8 +13,6 @@ import os
 from kniznica.parser.predict import parse_cmd
 from kniznica.data.ASE import load_xyz, get_expected
 from kniznica.model.SchNetPack20_batch_feature_vector import trained_NN
-#from kniznica.model.SchNetPack20mp_batch import trained_NN
-#from kniznica.model.SchNetPack21_batch import trained_NN
 from kniznica.output.conversions import collate_expected_predicted_all, collate_ensemble_variance_target
 from kniznica.output.stats import get_ensemble_variance
 from kniznica.output.npz import write_npz
