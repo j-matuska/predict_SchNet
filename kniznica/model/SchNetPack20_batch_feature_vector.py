@@ -90,7 +90,7 @@ class trained_NN:
         
         dataloader = AtomsLoader(
                 inputs,
-                batch_size=100,
+                batch_size=1, # slow, but each molecule is predicted individualy and it is possible to parse output of Trainer.predict()
                 num_workers=4,
                 shuffle=False,
                 # shuffle=True,
@@ -122,7 +122,7 @@ class trained_NN:
                 print(a)
                 print(type(a))
                 print(len(a))
-                pp.extend(a[self.target].numpy())
+                pp.append(a[self.target].numpy())
             
             print(len(pp), pp)
             
