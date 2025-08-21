@@ -41,9 +41,9 @@ def parse_cmd():
                         #nargs = '+',
                         default = "DS",
                         type = str,
-                        #choices = [ '01', '02', '03', '04', '05'],
+                        #choices = [ 'DS', 'feature_vector'],
                         required = False,
-                        help = "Choise of variable name to predict (target name). Necessary in case of hte 'custom' model. Name have to be identical to name in XYZ file and custom model. Default: 'DS' ",
+                        help = "Choise of variable name to predict (target name). Necessary in case of the 'custom' model. Name have to be identical to name in XYZ file and custom model. Default: 'DS' ",
                         metavar = "TARGET"
                         )
     
