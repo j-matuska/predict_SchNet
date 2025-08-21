@@ -74,12 +74,12 @@ def main(args):
     
     if output_format == "predicted":
         
-        csv_name = '{}_{}.csv'.format(name0, modelname)
+        npz_name = '{}_{}.npz'.format(name0, modelname)
         
-        logging.info('Writing predictions to file {} ...'.format(csv_name))
-        write_npz(csv_name, predictions)
+        logging.info('Writing predictions to file {} ...'.format(npz_name))
+        write_npz(npz_name, predictions)
         
-        logging.info('Predictions successfully stored in file {}'.format(csv_name))
+        logging.info('Predictions successfully stored in file {}'.format(npz_name))
     
     else:
         
