@@ -115,16 +115,16 @@ class trained_NN:
             
             predicted_property = trainer.predict(model, dataloaders=dataloader) # inputs tu urcite nie su dobre
             
-            print(type(predicted_property), len(predicted_property), predicted_property)
+            #print(type(predicted_property), len(predicted_property), predicted_property)
             
             pp = []
             for a in predicted_property:
-                print(a)
-                print(type(a))
-                print(len(a))
+                #print(a)
+                #print(type(a))
+                #print(len(a))
                 pp.append(a[self.target].numpy())
             
-            print(len(pp), pp)
+            #print(len(pp), pp)
             
             # add prediction to dictionary
             for i in range(n_mol):

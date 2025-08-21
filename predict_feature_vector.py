@@ -53,7 +53,7 @@ def main(args):
     
     # define properties of model
     model_dir, cutoff, target = get_model_properties(modelname, args)
-    print(target)
+    
     # load NN from config
     NNs = trained_NN(model_dir, splits, cutoff, target, device = device)
     
