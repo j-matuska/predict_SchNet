@@ -101,7 +101,7 @@ class trained_NN:
                 
         for split in self.splits:
             
-            model = pytorch_lightning_model_wrapper(self.model_dir, split)
+            model = pytorch_lightning_model_wrapper(self.model_dir, split, self.target)
             
             # calculation of prediction
                         
@@ -136,12 +136,14 @@ class pytorch_lightning_model_wrapper(pytorch_lightning.LightningModule):
     def __init__(
             self,
             model_dir,
-            s
+            s,
+            target
             ):
         
         super().__init__()
                         
         self.model_dir = "{model_dir}/{s}".format(model_dir = model_dir, s = s)
+        self.target = target
         
         # Load model at the end
         self.model = None
