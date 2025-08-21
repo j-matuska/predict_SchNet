@@ -12,6 +12,6 @@ def write_npz(npzname: str, property_list: list):
         for k,v in p.items():
             zaznam[k].append(v)
     
-    numpy.save(npzname, **zaznam)
+    numpy.savez(npzname, **zaznam)
     
     return 0
