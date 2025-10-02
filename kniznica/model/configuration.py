@@ -91,6 +91,11 @@ def get_models_configuration(modelname, args):
         "cutoff": 5.0,
         "target": "DS"
         },
+    "pdbqt_Mpro_SchNet" : {
+        "model_dir": "trained_models/pdbqt_Mpro_SchNet/", 
+        "cutoff": 5.0,
+        "target": "energy_Mpro"
+        },
     "current" : {
         "model_dir": ".", 
         "cutoff": 5.0,
