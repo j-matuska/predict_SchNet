@@ -57,6 +57,7 @@ def main(args):
     model_dir, cutoff, target = get_model_properties(modelname, args)
     
     # load NN from config
+    print(device)
     NNs = trained_NN(model_dir, splits, cutoff, target, device = device)
     
     start_time = time.time()

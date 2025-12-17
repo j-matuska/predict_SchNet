@@ -60,6 +60,7 @@ class trained_NN:
                 
         for split in self.splits:
             
+            print(self.device)
             model = pytorch_lightning_model_wrapper(self.model_dir, split, self.device)
             
             # calculation of prediction
