@@ -30,7 +30,7 @@ def main(args):
     xyz_name = args.xyz_file.name
     output_format = args.output
     
-    logging.basicConfig(level = logging.INFO, filename='{}.log'.format(modelname), filemode='a', force=True)
+    logging.basicConfig(level = logging.INFO, filename='{}_per_atom.log'.format(modelname), filemode='a', force=True)
     logging.info(' \n' )
     logging.info(' ============================================= \n' )
     logging.info(args)

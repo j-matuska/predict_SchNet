@@ -23,7 +23,7 @@ from kniznica.model.configuration import get_model_properties
 
 def main(args):
     
-    device = 'cpu'
+    device = args.device
     mode = args.mode
     modelname = args.model
     splits = args.splits
