@@ -9,12 +9,11 @@ python -m venv ~/.predict_SchNetPack
 ```
 Folder`~/.predict_SchNetPack` can be changed to any path. Write access to parent folder have to be granted.
 
-Install [SchNetPack](https://schnetpack.readthedocs.io/en/latest/index.html). For example:
+Activate python environment:
 ```
-git clone https://github.com/atomistic-machine-learning/schnetpack.git <dest_dir>
-cd <dest_dir>
-pip install .
+source ~/.predict_SchNetPack/bin/activate
 ```
+
 ## Core program
 
 Download program
@@ -22,10 +21,30 @@ Download program
 git clone https://github.com/j-matuska/predict_SchNet.git <dest_dir>
 cd <dest_dir>
 ```
+Instal requirements from file `predict_Schnet.txt` :
+```
+pip install -r predict_Schnet.txt
+```
 Install program
 ```
 pip install .
 ```
+## SchNetPack library
+Download source code from [SchNetPack 2.0.1](https://github.com/atomistic-machine-learning/schnetpack/releases/tag/v2.0.1), unpack to <dest_dir> and install:
+```
+cd <dest_dir>
+pip install .
+```
+
+### Experimental
+Instalation of the most recent version. It is not guaranteed to work.
+Install [SchNetPack](https://schnetpack.readthedocs.io/en/latest/index.html). For example:
+```
+git clone https://github.com/atomistic-machine-learning/schnetpack.git <dest_dir>
+cd <dest_dir>
+pip install .
+```
+
 # Usage
 
 Activate python environment:
