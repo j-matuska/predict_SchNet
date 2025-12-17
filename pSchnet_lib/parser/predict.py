@@ -76,11 +76,11 @@ def parse_cmd():
     parser.add_argument("--device", 
                         action = 'store',
                         #nargs = 1,
-                        default = 'gpu',
+                        default = 'cuda',
                         type = str,
-                        choices = ['gpu', 'cpu'],
+                        choices = ['cuda', 'cpu'],
                         required = False,
-                        help = "Optional choise of the computer resources. Mode 'gpu' is loading model to one graphic card. Mode 'cpu' is loading model into the cpu. Default: 'gpu' ",
+                        help = "Optional choise of the computer resources. Mode 'cuda' is loading model to one graphic card. Mode 'cpu' is loading model into the cpu. Default: 'cuda' ",
                         metavar = "DEVICE"
                         )
     

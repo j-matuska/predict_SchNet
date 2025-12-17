@@ -121,7 +121,7 @@ class pytorch_lightning_model_wrapper(pytorch_lightning.LightningModule):
         
         self.model_dir = "{model_dir}/{s}".format(model_dir = model_dir, s = s)
         print(device)
-        self.device = device
+        self.local_device = device
         
         # Load model at the end
         self.model = None
@@ -134,7 +134,7 @@ class pytorch_lightning_model_wrapper(pytorch_lightning.LightningModule):
     
         self.model = torch.load(
             self.model_dir+'/best_model',
-            map_location = self.device, # toto este moze byt problem
+            map_location = self.local_device, # toto este moze byt problem
             weights_only = False
             )
         
