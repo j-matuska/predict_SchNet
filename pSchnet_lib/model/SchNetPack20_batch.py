@@ -120,6 +120,7 @@ class pytorch_lightning_model_wrapper(pytorch_lightning.LightningModule):
         #     modelpath = "kniznica/model/trained_models/Schnet20_6_10Ang_train80/{s}".format(s = model_dir) #format(modelname = self.modelname, s = s)
         
         self.model_dir = "{model_dir}/{s}".format(model_dir = model_dir, s = s)
+        print(device)
         self.device = device
         
         # Load model at the end
