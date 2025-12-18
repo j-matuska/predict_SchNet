@@ -119,7 +119,7 @@ class pytorch_lightning_model_wrapper(pytorch_lightning.LightningModule):
         #     modelpath = "kniznica/model/trained_models/Schnet20_6_10Ang_train80/{s}".format(s = model_dir) #format(modelname = self.modelname, s = s)
         
         self.model_dir = "{model_dir}/{s}".format(model_dir = model_dir, s = s)
-        self.device = device
+        self.local_device = device
         
         # Load model at the end
         self.model = None
@@ -132,7 +132,7 @@ class pytorch_lightning_model_wrapper(pytorch_lightning.LightningModule):
     
         self.model = torch.load(
             self.model_dir+'/best_model',
-            map_location = self.device, # toto este moze byt problem
+            map_location = self._local_device, # toto este moze byt problem
             weights_only = False
             )
         
