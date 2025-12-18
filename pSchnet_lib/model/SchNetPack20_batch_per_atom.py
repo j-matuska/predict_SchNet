@@ -132,7 +132,7 @@ class pytorch_lightning_model_wrapper(pytorch_lightning.LightningModule):
     
         self.model = torch.load(
             self.model_dir+'/best_model',
-            map_location = self._local_device, # toto este moze byt problem
+            map_location = self.local_device, # toto este moze byt problem
             weights_only = False
             )
         
