@@ -57,7 +57,7 @@ def main(args):
     model_dir, cutoff, target = get_model_properties(modelname, args)
     
     #redefine target to per atom variable
-    target = "pa"
+    target = "DS" # this have to be modified in newer pathed version of SchNetPack
     
     # load NN from config
     NNs = trained_NN(model_dir, splits, cutoff, target, device = device)
