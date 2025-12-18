@@ -76,12 +76,19 @@ class trained_NN:
             
             # print(type(predicted_property), predicted_property)
             
+            # unused if batch_size = 1
+            # pp = []
+            # for a in predicted_property:
+            #     print(a)
+            #     print(type(a))
+            #     print(a[self.target].shape)
+            #     pp.extend([item for item in a[self.target].numpy()]) # there should be one molecule per line, but the lenght of the line could be a problem
             pp = []
             for a in predicted_property:
                 print(a)
                 print(type(a))
                 print(a[self.target].shape)
-                pp.extend([item for item in a[self.target].numpy()]) # there should be one molecule per line, but the lenght of the line could be a problem
+                pp.append(a[self.target].numpy()[0,:]) 
 
             #pp = torch.cat([ a["DS"] for a in predicted_property])
 
