@@ -80,6 +80,7 @@ class trained_NN:
             for a in predicted_property:
                 print(a)
                 print(type(a))
+                print(a[self.target].shape)
                 pp.extend([item for item in a[self.target].numpy()]) # there should be one molecule per line, but the lenght of the line could be a problem
 
             #pp = torch.cat([ a["DS"] for a in predicted_property])
