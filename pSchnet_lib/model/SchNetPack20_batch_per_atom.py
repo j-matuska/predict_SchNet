@@ -49,7 +49,7 @@ class trained_NN:
         
         dataloader = AtomsLoader(
                 inputs,
-                batch_size=100,
+                batch_size=1, # ak toto bude fungovat, tak to po zapatchovani SchNetPack treba prerobit
                 num_workers=4,
                 shuffle=False,
                 # shuffle=True,
