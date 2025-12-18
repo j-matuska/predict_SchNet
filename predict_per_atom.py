@@ -10,15 +10,15 @@ import platform
 import time
 import os 
 
-from lib.parser.predict import parse_cmd
-from lib.data.ASE import load_xyz, get_expected
-from lib.model.SchNetPack20_batch_per_atom import trained_NN
-#from lib.model.SchNetPack20mp_batch import trained_NN
-#from lib.model.SchNetPack21_batch import trained_NN
-from lib.output.conversions import collate_expected_predicted_all, collate_ensemble_variance_target
-from lib.output.stats import get_ensemble_variance
-from lib.output.csv import write_csv, write_EPcsv
-from lib.model.configuration import get_model_properties
+from pSchnet_lib.parser.predict import parse_cmd
+from pSchnet_lib.data.ASE import load_xyz, get_expected
+from pSchnet_lib.model.SchNetPack20_batch_per_atom import trained_NN
+#from pSchnet_lib.model.SchNetPack20mp_batch import trained_NN
+#from pSchnet_lib.model.SchNetPack21_batch import trained_NN
+from pSchnet_lib.output.conversions import collate_expected_predicted_all, collate_ensemble_variance_target
+from pSchnet_lib.output.stats import get_ensemble_variance
+from pSchnet_lib.output.csv import write_csv, write_EPcsv
+from pSchnet_lib.model.configuration import get_model_properties
 
 
 def main(args):
