@@ -10,11 +10,11 @@ import platform
 import time
 import os 
 
-from kniznica.parser.merge import parse_cmd
-from kniznica.data.ASE import load_xyz, get_expected
-from kniznica.data.CSV import load_csvs, collate_csvs, fill_empty_predictions
-from kniznica.output.conversions import collate_expected_predicted_all
-from kniznica.output.csv import write_csv
+from pSchnet_lib.parser.merge import parse_cmd
+from pSchnet_lib.data.ASE import load_xyz, get_expected
+from pSchnet_lib.data.CSV import load_csvs, collate_csvs, fill_empty_predictions
+from pSchnet_lib.output.conversions import collate_expected_predicted_all
+from pSchnet_lib.output.csv import write_csv
 
 
 def main(args):
