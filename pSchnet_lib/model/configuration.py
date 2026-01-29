@@ -26,6 +26,11 @@ def get_models_configuration(modelname, args):
         "cutoff": 5.0,
         "target": "DS"
         },
+    "Schnet20_6_5Ang_avg_train80" : {
+        "model_dir": "trained_models/Schnet20_6_5Ang_avg_train80/", 
+        "cutoff": 5.0,
+        "target": "DS"
+        },
     "PaiNN20_3_5Ang_train80" : {
         "model_dir": "trained_models/PaiNN20_3_5Ang_train80/", 
         "cutoff": 5.0,

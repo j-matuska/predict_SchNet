@@ -14,6 +14,7 @@ def parse_cmd():
                         default = 'Schnet20_6_10Ang_train80', # na himalaya; inde bude ina
                         type = str,
                         choices = ['Schnet20_6_5Ang_train80', 
+                                   'Schnet20_6_5Ang_avg_train80', 
                                    'Schnet20_6_10Ang_train80', 
                                    'Schnet03_6_10Ang_train80', 
                                    'PaiNN20_3_5Ang_train80', 
